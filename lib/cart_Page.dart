@@ -1,25 +1,27 @@
+// ignore: file_names
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:miniproject_1/showdetail.dart';
-
-
-class Favourite extends StatefulWidget {
-   const Favourite( {Key? key});
+class Cart extends StatefulWidget {
+  const Cart( {Key? key});
   @override
-  _FavouriteState createState() => _FavouriteState();
+  _CartState createState() => _CartState();
 }
 
-class _FavouriteState extends State<Favourite> {
+  @override
+class _CartState extends State<Cart> {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: fetchData("users-fav-items"),
+        child: fetchData("users-cart-items"),
       ),
     );
   }
+
+
 }
 Widget fetchData (String collectionName){
   return StreamBuilder(
@@ -31,13 +33,13 @@ Widget fetchData (String collectionName){
     builder:
         (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
       if (snapshot.hasError) {
-        return Center(
+        return const Center(
           child: Text("Something is wrong"),
         );
       }
 
       return ListView.builder(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
           itemCount:
           snapshot.data == null ? 0 : snapshot.data!.docs.length,
           itemBuilder: (_, index) {
@@ -58,12 +60,14 @@ Widget fetchData (String collectionName){
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(_documentSnapshot['clothingNameThai']),
-                              // SizedBox(height: 30,),
-                              // ignore: prefer_interpolation_to_compose_strings
                               Text('Color : '+(_documentSnapshot['color'])),
-                              // Text('Size : '+(_documentSnapshot['size'])),
-                              Text('Price : ${_documentSnapshot['price']}'),
- 
+                              Text('${_documentSnapshot['price']}'+' ฿',
+                                  style: const TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'FuzzyBubbles'
+                                  ),
+                                ),
                             ],
                           ),
                           trailing:
@@ -74,7 +78,7 @@ Widget fetchData (String collectionName){
                         .collection("items")
                         .doc(_documentSnapshot.id)
                         .delete();
-                  }, icon: Icon(Icons.delete),
+                  }, icon: const Icon(Icons.delete),
                   ),
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context)=> ShowDetail(_documentSnapshot['clothingNameThai'])));

@@ -1,4 +1,4 @@
-import 'package:miniproject_1/login.dart';
+import 'package:miniproject_1/login_Page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -25,8 +25,8 @@ class _ForgetPasswordPage extends State<ForgetPasswordPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AppBar(
-                title:Text("Forget Password"), //appbar title
-                backgroundColor: Color.fromARGB(255, 245, 	173,172 ) //appbar background color
+                title:Text("Forgot Password"), //appbar title
+                backgroundColor: const Color.fromARGB(255, 245, 	173,172 ) //appbar background color
               ),
             ],
           )
@@ -41,8 +41,8 @@ class _ForgetPasswordPage extends State<ForgetPasswordPage> {
             Container(child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 Text('RESET YOUR PASSWORD',
-              style: const TextStyle(
+                 const Text('RESET YOUR PASSWORD',
+              style: TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
               fontWeight: FontWeight.bold
               ),
@@ -74,9 +74,9 @@ class _ForgetPasswordPage extends State<ForgetPasswordPage> {
                 ),
               ),
             ),
-           Center(
+           const Center(
               child:Text('Check the text in your email inbox to  reset password.',
-              style: const TextStyle(
+              style: TextStyle(
               color: Color.fromARGB(255, 0, 0, 0),
               fontWeight: FontWeight.bold
               ),
@@ -90,23 +90,19 @@ class _ForgetPasswordPage extends State<ForgetPasswordPage> {
 
 
 //RegisterButton
-   RaisedButton submitButton() {
-    return RaisedButton(
+   ElevatedButton submitButton() {
+    return ElevatedButton(
       
       onPressed: () async {
         print('Reset Password');
         print(email.text);
         sendPasswordResetEmail(email.text);
-        
-        // ignore: use_build_context_synchronously
-        // Navigator.pushAndRemoveUntil(
-        //     context,
-        //     MaterialPageRoute(builder: (context) => const LoginPage()),
-        //     ModalRoute.withName('/'));
+        Navigator.pushNamed(context, '/');
       },
-      color: Color.fromARGB(255, 245, 	173,172 ),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-      child: Text(
+      style: ElevatedButton.styleFrom(
+      backgroundColor: const Color.fromARGB(255, 245, 	173,172 ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),),
+      child: const Text(
             'submit',
             style: TextStyle(color: Colors.white),
           ),

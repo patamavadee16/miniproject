@@ -1,13 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.miniproject_1">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-   
         android:label="miniproject_1"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true"
         android:networkSecurityConfig="@xml/network_security_config">
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

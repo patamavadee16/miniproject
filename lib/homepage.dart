@@ -1,12 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:miniproject_1/FavoritePage.dart';
-import 'package:miniproject_1/cartPage.dart';
-import 'package:miniproject_1/displayProductPage.dart';
+import 'package:miniproject_1/favorite_Page.dart';
+import 'package:miniproject_1/cart_Page.dart';
+import 'package:miniproject_1/displayProduct_Page.dart';
 import 'package:miniproject_1/drawer.dart';
-import 'package:miniproject_1/login.dart';
+import 'package:miniproject_1/home_Page.dart';
+import 'package:miniproject_1/login_Page.dart';
 import 'package:miniproject_1/profile_page.dart';
+import 'package:miniproject_1/createReview_Page.dart';
+import 'package:miniproject_1/reviewPage.dart';
 
 
 class Homepage extends StatefulWidget {
@@ -21,14 +24,11 @@ class _HomepageState extends State<Homepage> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    displayProduct(),
+    Home(),
     Favourite(),
     Cart(),
-    Text(
-      'Index 4: Review',
-      style: optionStyle,
-    ),
-    ProfilePage()
+    reviewPage(),
+    Profile(),
   ];
 
   void _onItemTapped(int index) {
@@ -42,6 +42,14 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       drawer: SharedDrawer(),
       appBar: AppBar(
+        title: const Center(
+          child: Text('My Shop',
+                          style: TextStyle(color: Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 30,
+                            fontFamily: 'FuzzyBubbles'
+                          ),
+                        ),
+        ),
         backgroundColor:  Color.fromARGB(255, 245, 	173,172 ),
         actions: <Widget>[
             IconButton(

@@ -21,12 +21,17 @@ class _ShowDetail extends State<ShowDetail> {
   Widget build(BuildContext context) {
     String _id = widget._idi;
     return StreamBuilder(
-        stream: getBook(_id),
+        stream: getProduct(_id),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Color.fromARGB(255, 245, 	173,172 ),
-              title: const Text("Detail "),
+              title: const Text('Detail.',
+                        style: TextStyle(color: Color.fromARGB(255, 247, 247, 247),
+                          fontSize: 30,
+                          fontFamily: 'FuzzyBubbles'
+                        ),
+                      ),
             ),
             body: snapshot.hasData
                 ? buildProductList(snapshot.data!)
@@ -45,47 +50,43 @@ class _ShowDetail extends State<ShowDetail> {
         var model = data.docs.elementAt(index);
         String title = model['clothingNameEng'] + '  ' + model['clothingNameThai'];
         return Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            AspectRatio(
-              aspectRatio:40.0/30.0,
-              child:
+           Text(title,style: TextStyle( fontWeight: FontWeight.bold,
+                  fontSize: 25,)),
+                  
             CarouselSlider(
-              items: [model['imageUrl'],model['imageUrl_2']].map((item) => 
+              
+              items: [model['imageUrl'],model['imageUrl_2'],model['imageUrl_3']].map((item) => 
                Container(
-                // width: 1000,
-                // height: 1000,
+                height: 1000,
                  child: Image.network(
                     item,
                      fit: BoxFit.cover,
-                //     width: 1000,
-                // height: 1000,
+
+                 ),
                   ),
-               ),
+               
               ).toList(),
             options: CarouselOptions(
               autoPlay: true,
-              // enlargeCenterPage: true,
-              //         viewportFraction:0.8,
-              //         enlargeStrategy: CenterPageEnlargeStrategy.height,
-            ))),
-            SizedBox(height: 100),
-            // Text(
-            //   title,
-            //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-            // ),
+                          enlargeCenterPage: true,
+                          height: MediaQuery.of(context).size.height/2,
+                        ),),
+            // SizedBox(height: 100),
             Container(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(title,style: TextStyle( fontWeight: FontWeight.bold,
-                  fontSize: 20,)),
+                  fontSize: 25,)),
+                 
                   Text('Price : '+model['price'].toString()+' ฿'),
-                  Text('Details'),
                   Text('Color : '+model['color']),
                   Text('Size : '+model['size']),
                   Text('Meterial: '+model['meterial']),
+                  Text('description: '+model['description']),
+                  SizedBox(height: 20,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -100,7 +101,7 @@ class _ShowDetail extends State<ShowDetail> {
                        child: addtoCart_click(model)
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             )
@@ -123,11 +124,11 @@ class _ShowDetail extends State<ShowDetail> {
     var currentUser = _auth.currentUser;
     
     CollectionReference _collectionRef =
-        FirebaseFirestore.instance.collection("users-order-items");
+        FirebaseFirestore.instance.collection("users-cart-items");
     return _collectionRef
         .doc(currentUser!.email)
         .collection("items")
-        .doc()
+        .doc(model['clothingID'])
         .set({
       "clothingID":model['clothingID'],
       "clothingNameEng":model['clothingNameEng'],
@@ -135,32 +136,35 @@ class _ShowDetail extends State<ShowDetail> {
       "color":model['color'],
       "imageUrl":model['imageUrl'],
       "imageUrl_2":model['imageUrl_2'],
+      "imageUrl_3":model['imageUrl_3'],
       "meterial":model['meterial'],
       "price":model['price'],
-      "size":model['size']
+      "size":model['size'],
+      "count":model['count']+1,
 
     }).then((value) => print("Added to cart"));
   }
   
-     RaisedButton addOrderButton(QueryDocumentSnapshot<Object?> model) {
-    return RaisedButton(
+     ElevatedButton addOrderButton(QueryDocumentSnapshot<Object?> model) {
+    return ElevatedButton(
       
-      onPressed: () async {addToCart(model);
+      onPressed: () async {
+        
       },
-      color: Color.fromARGB(255, 245, 	173,172 ),
-  
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+      style: ElevatedButton.styleFrom(
+        primary:Color.fromARGB(255, 245, 	173,172 ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),),
       child: Text(
             'Order now',
             style: TextStyle(color: Colors.white),
           ),
     );
   }
-  Stream<QuerySnapshot> getBook(String titleName) {
+  Stream<QuerySnapshot> getProduct(String titleID) {
     // Firestore _firestore = Firestore.instance;
     return _firestore
         .collection('clothing')
-        .where('clothingNameThai', isEqualTo: titleName)
+        .where('clothingID', isEqualTo: titleID)
         .snapshots();
   }
 }

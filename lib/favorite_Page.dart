@@ -3,24 +3,23 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:miniproject_1/showdetail.dart';
-class Cart extends StatefulWidget {
-  const Cart( {Key? key});
+
+
+class Favourite extends StatefulWidget {
+   const Favourite( {Key? key});
   @override
-  _CartState createState() => _CartState();
+  _FavouriteState createState() => _FavouriteState();
 }
 
+class _FavouriteState extends State<Favourite> {
   @override
-class _CartState extends State<Cart> {
-  
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: fetchData("users-cart-items"),
+        child: fetchData("users-fav-items"),
       ),
     );
   }
-
-
 }
 Widget fetchData (String collectionName){
   return StreamBuilder(
@@ -32,8 +31,9 @@ Widget fetchData (String collectionName){
     builder:
         (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
       if (snapshot.hasError) {
+        // ignore: prefer_const_constructors
         return Center(
-          child: Text("Something is wrong"),
+          child: const Text("Something is wrong"),
         );
       }
 
@@ -48,21 +48,31 @@ Widget fetchData (String collectionName){
             return Card(
               elevation: 5,
               child: ListTile(
-                    leading: Container(
-                            height: 200,
-                            width: 100,
+                    leading: SizedBox(
                             child: Image(
                             image:NetworkImage(_documentSnapshot['imageUrl']),
+                            fit: BoxFit.fitHeight,
                             ),
                           ),
                     subtitle:    Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(_documentSnapshot['clothingNameThai']),
-                              // SizedBox(height: 30,),
+                              Text((_documentSnapshot['clothingNameThai']),
+                                 // ignore: prefer_const_constructors
+                                 style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'FuzzyBubbles'
+                                ),),
+                              // ignore: prefer_interpolation_to_compose_strings
                               Text('Color : '+(_documentSnapshot['color'])),
                               // Text('Size : '+(_documentSnapshot['size'])),
-                              Text('Price : ${_documentSnapshot['price']}'),
+                              Text('${_documentSnapshot['price']}'+' ฿',
+                                  style: const TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'FuzzyBubbles'
+                                  ),)
  
                             ],
                           ),

@@ -21,71 +21,92 @@ class _LoginPageState extends State<LoginPage> {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: 
-      PreferredSize( //wrap with PreferredSize
-                preferredSize: Size.fromHeight(80), //height of appbar
-                child: AppBar(
-                  title:Center(child: Text("AppBar")), //appbar title
-                  backgroundColor: Color.fromARGB(255, 245, 	173,172 ) //appbar background color
-                )
-          ),
+      // appBar: 
+      // PreferredSize( //wrap with PreferredSize
+      //           preferredSize: Size.fromHeight(80), //height of appbar
+      //           child: AppBar(
+      //             title:Center(child: Text("AppBar")), //appbar title
+      //             backgroundColor: Color.fromARGB(255, 245, 	173,172 ) //appbar background color
+      //           )
+      //     ),
       
       body: Form(
+        
         key: _formstate,
         child: ListView(
           children: <Widget>[
-            // Container(
-            //   width: w,
-            //   height: h*0.3,
-            //   decoration: const BoxDecoration(
-            //     image: DecorationImage(
-            //     image:AssetImage('assets/cartoon.jpg'),
-            //     // fit: BoxFit.cover,
-            //     alignment: Alignment.center,
-            //     )
-            //   ),
-            // ),
+            const SizedBox(height: 20,),
             Container(
               margin: EdgeInsets.only(left: 20,right: 20,top: 50),
               width: w,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  
+                   Container(
+              width: 70,
+              height: 70,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                image:AssetImage('assets/iconsshop.png'),
+                // fit: BoxFit.cover,
+                alignment: Alignment.center,
+                fit: BoxFit.cover
+                )
+              ),
+            ),const SizedBox(height: 50,),
                 // ignore: prefer_const_constructors
-                  Text('Login',
-                    style: const TextStyle(
+                  Text('Welcome',
+                    style: const TextStyle(color: Color.fromARGB(255, 245, 	173,172 ),
                       fontSize: 50,
-                      fontWeight: FontWeight.bold
+                      // fontStyle: FuzzyBubbles,
+                      // fontWeight: FontWeight.bold,
+                      fontFamily: 'Mitr'
+                    ),
+                  ), 
+                  const Text('Hello! Welcome to My Shop.',
+                    style: TextStyle(
+                      fontSize: 20,
+                      // fontStyle: FuzzyBubbles,
+                      // fontWeight: FontWeight.bold,
+                      fontFamily: 'Mitr'
                     ),
                   ),
                   const SizedBox(height: 20,),
-                  Container(
-                    margin: EdgeInsets.only(left: 20,right: 20),
+                  Card(
+                    elevation: 5,
+                    color: Color.fromARGB(255, 245, 244, 244),
+                    shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0),
+          ),
+                    child: Container(
+                    margin: EdgeInsets.all(20),
+                    
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                      const Text('Email',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                      ),
-                    ),
+                    //   const Text('Email',
+                    //   style: TextStyle(
+                    //     fontSize: 20,
+                    //     fontWeight: FontWeight.bold
+                    //   ),
+                    // ),
                       const SizedBox(height: 10,),
                       emailTextFormField(),
                       const SizedBox(height: 10,),
-                      const Text('Password',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                      ),
-                    ),
+                    //   const Text('Password',
+                    //   style: TextStyle(
+                    //     fontSize: 20,
+                    //     fontWeight: FontWeight.bold
+                    //   ),
+                    // ),
                     const SizedBox(height: 10,),
                       passwordTextFormField(),
                       ],
                     ),
                   ),
+                  ),
+                  const SizedBox(height: 20,),
                   button(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -119,8 +140,8 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  RaisedButton button() {
-    return RaisedButton(
+  ElevatedButton button() {
+    return ElevatedButton(
           onPressed: () async {
           if (_formstate.currentState!.validate()) {
             print('Valid Form');
@@ -140,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                 }
               }).catchError((reason) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Login or Password Invalid")));
+                    const SnackBar(content: Text("Email or Password Invalid")));
               });
             } on FirebaseAuthException catch (e) {
               if (e.code == 'user-not-found') {
@@ -152,34 +173,35 @@ class _LoginPageState extends State<LoginPage> {
           } else
             print('Invalid Form');
         },
-          color: Color.fromARGB(255, 245, 	173,172 ),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-          child: Text(
+          style: ElevatedButton.styleFrom(
+        primary:const Color.fromARGB(255, 245, 	173,172 ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),),
+          child: const Text(
             'Login',
             style: TextStyle(color: Colors.white),
           ),
         );
   }
 
-  FlatButton forgetPasswordButton(BuildContext context) {
-    return FlatButton(
+  TextButton forgetPasswordButton(BuildContext context) {
+    return TextButton(
       // ignore: prefer_const_constructors
-      child: Text('Forget Password?',
+      child: Text('Forgot Password?',
         style: TextStyle(
           color: Color.fromARGB(255, 216,78,78)
           ),
         ),
       onPressed: () {
         // print('Goto  Regis pagge');
-        Navigator.pushNamed(context, '/forgetPasswordPage');
+        Navigator.pushNamed(context, '/forgotPasswordPage');
       },
     );
   }
-  FlatButton registerButton(BuildContext context) {
-    return FlatButton(
+  TextButton registerButton(BuildContext context) {
+    return TextButton(
       // ignore: prefer_const_constructors
       child: Text('Register Now',
-        style: TextStyle(
+        style: const TextStyle(
           color: Color.fromARGB(255, 216,78,78)
           ),
         ),
@@ -206,7 +228,7 @@ class _LoginPageState extends State<LoginPage> {
       keyboardType: TextInputType.text,
       decoration:  InputDecoration(
         labelText: 'Password',
-        // icon: const Icon(Icons.lock),
+        icon: const Icon(Icons.lock),
         hintText: ('Password'),
         border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(20),
@@ -221,16 +243,17 @@ class _LoginPageState extends State<LoginPage> {
         email = value!.trim();
       },
       validator: (value) {
-        if (!validateEmail(value!))
+        if (!validateEmail(value!)) {
           return 'Please fill in E-mail field';
-        else
+        } else {
           return null;
+        }
       },
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
      decoration: InputDecoration(
         labelText: ('E-mail'),
-        // icon: const Icon(Icons.email),
+        icon: const Icon(Icons.email),
         hintText: ('aaaa@mail'),
         border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(20),
