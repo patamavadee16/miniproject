@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -21,15 +19,6 @@ class _LoginPageState extends State<LoginPage> {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
     return Scaffold(
-      // appBar: 
-      // PreferredSize( //wrap with PreferredSize
-      //           preferredSize: Size.fromHeight(80), //height of appbar
-      //           child: AppBar(
-      //             title:Center(child: Text("AppBar")), //appbar title
-      //             backgroundColor: Color.fromARGB(255, 245, 	173,172 ) //appbar background color
-      //           )
-      //     ),
-      
       body: Form(
         
         key: _formstate,
@@ -44,31 +33,26 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                    Container(
-              width: 70,
-              height: 70,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                image:AssetImage('assets/iconsshop.png'),
-                // fit: BoxFit.cover,
-                alignment: Alignment.center,
-                fit: BoxFit.cover
-                )
-              ),
-            ),const SizedBox(height: 50,),
+                    width: 160,
+                    height: 160,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                      image:AssetImage('assets/logo1.png'),
+                      alignment: Alignment.center,
+                      fit: BoxFit.fitHeight,
+                      )
+                    ),
+                  ),
                 // ignore: prefer_const_constructors
                   Text('Welcome',
                     style: const TextStyle(color: Color.fromARGB(255, 245, 	173,172 ),
-                      fontSize: 50,
-                      // fontStyle: FuzzyBubbles,
-                      // fontWeight: FontWeight.bold,
+                      fontSize: 45,
                       fontFamily: 'Mitr'
                     ),
                   ), 
-                  const Text('Hello! Welcome to My Shop.',
+                  const Text('Hello! Welcome to Sodsai Shop.',
                     style: TextStyle(
                       fontSize: 20,
-                      // fontStyle: FuzzyBubbles,
-                      // fontWeight: FontWeight.bold,
                       fontFamily: 'Mitr'
                     ),
                   ),
@@ -77,30 +61,16 @@ class _LoginPageState extends State<LoginPage> {
                     elevation: 5,
                     color: Color.fromARGB(255, 245, 244, 244),
                     shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.0),
-          ),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
                     child: Container(
                     margin: EdgeInsets.all(20),
-                    
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                    //   const Text('Email',
-                    //   style: TextStyle(
-                    //     fontSize: 20,
-                    //     fontWeight: FontWeight.bold
-                    //   ),
-                    // ),
                       const SizedBox(height: 10,),
                       emailTextFormField(),
-                      const SizedBox(height: 10,),
-                    //   const Text('Password',
-                    //   style: TextStyle(
-                    //     fontSize: 20,
-                    //     fontWeight: FontWeight.bold
-                    //   ),
-                    // ),
-                    const SizedBox(height: 10,),
+                      const SizedBox(height: 20,),
                       passwordTextFormField(),
                       ],
                     ),
@@ -115,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      forgetPasswordButton(context),
+                      forgotPasswordButton(context),
                     ],
                   ),
                   Container(
@@ -133,7 +103,6 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
-                // registerButton( context),
                 const SizedBox(height: 10,),
                 ],
               ),
@@ -178,26 +147,22 @@ class _LoginPageState extends State<LoginPage> {
             print('Invalid Form');
         },
           style: ElevatedButton.styleFrom(
-        primary:const Color.fromARGB(255, 245, 	173,172 ),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),),
-          child: const Text(
-            'Login',
-            style: TextStyle(color: Colors.white),
-          ),
-        );
+          primary:const Color.fromARGB(255, 245, 	173,172 ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),),
+              child: const Text('Login',style: TextStyle(color: Colors.white),),
+      );
   }
 
-  TextButton forgetPasswordButton(BuildContext context) {
+  TextButton forgotPasswordButton(BuildContext context) {
     return TextButton(
       // ignore: prefer_const_constructors
       child: Text('Forgot Password?',
-        style: TextStyle(
+        style: const TextStyle(
           color: Color.fromARGB(255, 216,78,78),
           fontFamily: 'Mitr'
           ),
         ),
       onPressed: () {
-        // print('Goto  Regis pagge');
         Navigator.pushNamed(context, '/forgotPasswordPage');
       },
     );
@@ -217,7 +182,6 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
   }
-
 
   TextFormField passwordTextFormField() {
     return TextFormField(

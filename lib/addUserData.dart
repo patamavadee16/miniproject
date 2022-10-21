@@ -19,25 +19,22 @@ class _UserFormState extends State<UserForm> {
   final TextEditingController _phone = TextEditingController();
   final TextEditingController _dateOfbirth = TextEditingController();
   final TextEditingController _age = TextEditingController();
-  dynamic  choosSex;
+ var  choosSex;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      
+    return Scaffold(     
       body: Form(
         key: _form,
         child: ListView(
           padding: EdgeInsets.only(left: 40,right: 40,top:100),
-          children: <Widget>[
-            
+          children: <Widget>[           
             Container(
               width: 70,
               height: 70,
               decoration: const BoxDecoration(
                 image: DecorationImage(
                 image:AssetImage('assets/icons-edit-profile.png'),
-                // fit: BoxFit.cover,
                 alignment: Alignment.center,
                 fit: BoxFit.fitHeight
                 )
@@ -53,19 +50,19 @@ class _UserFormState extends State<UserForm> {
                     ),
             ), 
             const SizedBox(height: 20,),
-            firstNameTextFormField(), SizedBox(height: 20,),
-            lastNameTextFormField(), SizedBox(height: 20,),
-            phoneNumberTextFormField(), SizedBox(height: 20,),
-            dateOfBirth(), SizedBox(height: 20,),
+            firstNameTextFormField(), 
+            SizedBox(height: 20,),
+            lastNameTextFormField(), 
+            SizedBox(height: 20,),
+            phoneNumberTextFormField(), 
+            SizedBox(height: 20,),
+            dateOfBirth(), 
+            SizedBox(height: 20,),
             ageTextFormField(), 
-             const Text('  Gender',
-                      style: TextStyle(color: Color.fromARGB(255, 0, 0, 0),
-                        fontSize: 20,
-                      ),
-                    ),
-            Gender(), SizedBox(height: 20,),
-           
-            buildSaveButton() ,SizedBox(height: 20,),
+             const Text('  Gender',style: TextStyle(color: Color.fromARGB(255, 0, 0, 0),fontSize: 20,),),
+            Gender(), 
+            SizedBox(height: 20,),
+            buildSaveButton()
           ],
         ),
       ),
@@ -73,8 +70,7 @@ class _UserFormState extends State<UserForm> {
   }
  
  ElevatedButton buildSaveButton() {
-    return ElevatedButton(
-        
+    return ElevatedButton(    
         onPressed: () async {
           if (_form.currentState!.validate()) {
             print('save button press');
@@ -112,11 +108,10 @@ class _UserFormState extends State<UserForm> {
             );
           }
         },
-      style: ElevatedButton.styleFrom(
-        primary:const Color.fromARGB(255, 245, 	173,172 ),
+      style: ElevatedButton.styleFrom(primary:const Color.fromARGB(255, 245, 	173,172 ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),),
       child: const Text('Save',style:TextStyle(color: Colors.white,fontSize: 20)),
-       );
+      );
   }
   TextFormField firstNameTextFormField() {
     return TextFormField(
@@ -132,7 +127,6 @@ class _UserFormState extends State<UserForm> {
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         labelText: ('Firstname'),
-        // icon: const Icon(Icons.email),
         hintText: ('enter your firstname '),
         border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(20),
@@ -153,7 +147,6 @@ class _UserFormState extends State<UserForm> {
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         labelText: ('Last name'),
-        // icon: const Icon(Icons.email),
         hintText: ('enter your lastname '),
         border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(20),
@@ -189,7 +182,6 @@ class _UserFormState extends State<UserForm> {
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         labelText: ('Phone Number'),
-        // icon: const Icon(Icons.phone_enabled_outlined),
         hintText: ('enter your phone number '),
         border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(20),
@@ -210,14 +202,11 @@ class _UserFormState extends State<UserForm> {
                   readOnly: true,
                   decoration: InputDecoration(
                     hintText: "Date of Birth",
-                    suffixIcon: IconButton(
-                      onPressed: () => _selectDateFromPicker(context),
-                      icon: Icon(Icons.calendar_today_outlined),
-                    ),
+                    suffixIcon: IconButton(onPressed: () => _selectDateFromPicker(context),icon: Icon(Icons.calendar_today_outlined),),
                       border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-        )
-                  ),
+                      )
+                ),
     );
   }
   TextFormField ageTextFormField() {
@@ -234,7 +223,6 @@ class _UserFormState extends State<UserForm> {
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         labelText: ('Age'),
-        // icon: const Icon(Icons.number),
         hintText: ('enter your age '),
         border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(20),

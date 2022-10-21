@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:miniproject_1/homepage.dart';
+import 'package:miniproject_1/bottomNavi.dart';
 import 'package:miniproject_1/order_Page.dart';
 
 

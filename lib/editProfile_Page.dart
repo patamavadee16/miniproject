@@ -5,17 +5,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class editProfile extends StatefulWidget {
+class EditProfile extends StatefulWidget {
   @override
-  _editProfileState createState() => _editProfileState();
+  _EditProfileState createState() => _EditProfileState();
 }
 
-class _editProfileState extends State<editProfile> {
+class _EditProfileState extends State<EditProfile> {
   final _formstate = GlobalKey<FormState>();
-  TextEditingController ?_firstnameController;
-  TextEditingController ?_lastnameController;
-  TextEditingController ?_phoneController;
-  TextEditingController ?_ageController;
+  TextEditingController ?_firstName;
+  TextEditingController ?_lastName;
+  TextEditingController ?_phone;
+  TextEditingController ?_age;
   File? file;
   setDataToTextField(data){
     return  Form(
@@ -23,107 +23,129 @@ class _editProfileState extends State<editProfile> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        TextFormField(
-          controller: _firstnameController = TextEditingController(text: data['firstname']),
-          validator: (value) {
-        if (value!.isEmpty)
-          return 'Please fill in lastname field';
-        else
-          return null;
-      },
-      keyboardType: TextInputType.text,
-      textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
-        labelText: ('Last name'),
-        // icon: const Icon(Icons.email),
-        hintText: ('enter your lastname '),
-        border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20),
-        )
-      ),
-        ),
-        TextFormField(
-          controller: _lastnameController = TextEditingController(text: data['lastname']),
-          validator: (value) {
-        if (value!.isEmpty)
-          return 'Please fill in lastname field';
-        else
-          return null;
-      },
-      keyboardType: TextInputType.text,
-      textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
-        labelText: ('Last name'),
-        // icon: const Icon(Icons.email),
-        hintText: ('enter your lastname '),
-        border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20),
-        )
-      ),
-        ),
-        TextFormField(
-          controller: _phoneController = TextEditingController(text: data['phone']),
-          validator: (value) {
-        if (value!.isEmpty) {
-          return 'Please fill in phone number field';
-        } else {
-          return null;
-        }
-      },
-      keyboardType: TextInputType.number,
-      textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
-        labelText: ('Phone Number'),
-        // icon: const Icon(Icons.phone_enabled_outlined),
-        hintText: ('enter your phone number '),
-        border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20),
-        )
-      ),
-        ),
-        TextFormField(
-          controller: _ageController = TextEditingController(text: data['age']),
-          validator: (value) {
-        if (value!.isEmpty) {
-          return 'Please fill in age field';
-        } else {
-          return null;
-        }
-      },
-      keyboardType: TextInputType.number,
-      textInputAction: TextInputAction.next,
-      decoration: InputDecoration(
-        labelText: ('Age'),
-        // icon: const Icon(Icons.number),
-        hintText: ('enter your age '),
-        border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20),
-        )
-      ),
-        ),
+        firstNameField(data),
+        lastNameField(data),
+        phoneField(data),
+        ageField(data),
         Row(
           children: [
             Expanded(
-              child: ElevatedButton(
-              onPressed: (){
-              updateData();},
-              style: ElevatedButton.styleFrom(
-            primary:const Color.fromARGB(255, 245, 	173,172 ),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),),
-       child: Text("Update")),),
+              child: updateButton(),),
           ],
         )
       ],
     ),);
   }
 
+  ElevatedButton updateButton() {
+    return ElevatedButton(
+            onPressed: (){
+            updateData();},
+            style: ElevatedButton.styleFrom(
+          primary:const Color.fromARGB(255, 245, 	173,172 ),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),),
+     child: Text("Update"));
+  }
+
+  TextFormField phoneField(data) {
+    return TextFormField(
+        controller: _phone = TextEditingController(text: data['phone']),
+        validator: (value) {
+      if (value!.isEmpty) {
+        return 'Please fill in phone number field';
+      } else {
+        return null;
+      }
+    },
+    keyboardType: TextInputType.number,
+    textInputAction: TextInputAction.next,
+    decoration: InputDecoration(
+      labelText: ('Phone Number'),
+      // icon: const Icon(Icons.phone_enabled_outlined),
+      hintText: ('enter your phone number '),
+      border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(20),
+      )
+    ),
+      );
+  }
+
+  TextFormField ageField(data) {
+    return TextFormField(
+        controller: _age = TextEditingController(text: data['age']),
+        validator: (value) {
+      if (value!.isEmpty) {
+        return 'Please fill in age field';
+      } else {
+        return null;
+      }
+    },
+    keyboardType: TextInputType.number,
+    textInputAction: TextInputAction.next,
+    decoration: InputDecoration(
+      labelText: ('Age'),
+      // icon: const Icon(Icons.number),
+      hintText: ('enter your age '),
+      border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(20),
+      )
+    ),
+      );
+  }
+
+  TextFormField lastNameField(data) {
+    return TextFormField(
+        controller: _lastName = TextEditingController(text: data['lastname']),
+        validator: (value) {
+      if (value!.isEmpty)
+        return 'Please fill in lastname field';
+      else
+        return null;
+    },
+    keyboardType: TextInputType.text,
+    textInputAction: TextInputAction.next,
+    decoration: InputDecoration(
+      labelText: ('Last name'),
+      // icon: const Icon(Icons.email),
+      hintText: ('enter your lastname '),
+      border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(20),
+      )
+    ),
+      );
+  }
+
+  TextFormField firstNameField(data) {
+    return TextFormField(
+        controller: _firstName = TextEditingController(text: data['firstname']),
+        validator: (value) {
+      if (value!.isEmpty) {
+        return 'Please fill in lastname field';
+      } else {
+        return null;
+      }
+    },
+    keyboardType: TextInputType.text,
+    textInputAction: TextInputAction.next,
+    decoration: InputDecoration(
+      labelText: ('Last name'),
+      // icon: const Icon(Icons.email),
+      hintText: ('enter your lastname '),
+      border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(20),
+      )
+    ),
+      );
+  }
+
   updateData(){
     CollectionReference _collectionRef = FirebaseFirestore.instance.collection("users-form-data");
     return _collectionRef.doc(FirebaseAuth.instance.currentUser!.email).update(
         {
-          "lastname":_lastnameController!.text,
-          "phone":_phoneController!.text,
-          "age":_ageController!.text,
+          "firststname":_firstName!.text,
+          "lastname":_lastName!.text,
+          "phone":_phone!.text,
+          "age":_age!.text,
         }
         ).then((value) => print("Updated Successfully"));
   }

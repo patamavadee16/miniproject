@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:favorite_button/favorite_button.dart';
 
 class ShowDetail extends StatefulWidget {
   final String _idi; 
@@ -15,7 +16,7 @@ class ShowDetail extends StatefulWidget {
 
 class _ShowDetail extends State<ShowDetail> {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  
+  late bool favorite;
   // ProductsController producsController = ProductsController.instance;
   @override
   Widget build(BuildContext context) {
@@ -84,12 +85,7 @@ class _ShowDetail extends State<ShowDetail> {
                   fontSize: 25,
                   fontFamily: 'Mitr')), 
                   trailing: IconButton(onPressed: (){addToFav(model);},
-                  icon:data.docs.length==0?Icon(
-                      Icons.favorite_outline,
-                      color: Colors.white,
-                    ):Icon(
-                      Icons.favorite,
-                      color: Colors.red)),),
+                  icon:Fav(),),),
         
                 
                   Text('Price : ${model['price']} ฿',style: textStyle()),
@@ -121,6 +117,17 @@ class _ShowDetail extends State<ShowDetail> {
       },
     );
     
+  }
+
+  FavoriteButton Fav() {
+    return FavoriteButton(
+              isFavorite: true,
+              // iconDisabledColor: Colors.white,
+              valueChanged: (_isFavorite) {
+                print('Is Favorite : $_isFavorite');
+                bool favorite = _isFavorite;
+              },
+            );
   }
 
   TextStyle textStyle() {

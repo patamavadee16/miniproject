@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:miniproject_1/showdetail.dart';
 
 
-class orderPage extends StatefulWidget {
-   const orderPage( {Key? key});
+class OrderPage extends StatefulWidget {
+   const OrderPage( {Key? key});
   @override
-  _orderPageState createState() => _orderPageState();
+  _OrderPageState createState() => _OrderPageState();
 }
 
-class _orderPageState extends State<orderPage> {
+class _OrderPageState extends State<OrderPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

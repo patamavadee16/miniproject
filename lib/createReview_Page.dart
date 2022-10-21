@@ -7,14 +7,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:miniproject_1/reviewPage.dart';
 
-class createReviewPost extends StatefulWidget {
-  const createReviewPost({super.key});
+class CreateReviewPost extends StatefulWidget {
+  const CreateReviewPost({super.key});
 
   @override
-  State<createReviewPost> createState() => _createReviewPostState();
+  State<CreateReviewPost> createState() => _CreateReviewPostState();
 }
 
-class _createReviewPostState extends State<createReviewPost> {
+class _CreateReviewPostState extends State<CreateReviewPost> {
   final _form = GlobalKey<FormState>();
   TextEditingController title = TextEditingController();
   TextEditingController  description= TextEditingController();
@@ -24,37 +24,24 @@ class _createReviewPostState extends State<createReviewPost> {
     return Scaffold(
     appBar: AppBar(
               backgroundColor: Color.fromARGB(255, 245, 	173,172 ),
-              title: const Text('My Shop',
-                        style: TextStyle(color: Color.fromARGB(255, 247, 247, 247),
-                          fontSize: 30,
-                          fontFamily: 'FuzzyBubbles'
-                        ),
-                      ),
+              title: const Text('My Shop',style: TextStyle(color: Color.fromARGB(255, 247, 247, 247),fontSize: 30,fontFamily: 'FuzzyBubbles'))
             ),
-      body:  Form(
-        key: _form,
-        child:ListView(
+    body:  Form(
+      key: _form,
+      child:ListView(
         padding: const EdgeInsets.only(left: 20,right: 20,top: 100),
         children:[
-           Expanded(
-            child:
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  const Text('New Post',
-                        style:  TextStyle(color: Color.fromARGB(255, 245, 	173,172 ),
-                          fontSize: 50,
-                          fontFamily: 'FuzzyBubbles'
-                        ),
-                      ),          groupImage(),
+                  const Text('New Post',style:  TextStyle(color: Color.fromARGB(255, 245, 	173,172 ),fontSize: 50,fontFamily: 'Mitr'),),          groupImage(),
                   const SizedBox(height: 30,),
                   titleTextFormField(),
                   const SizedBox(height: 30,),
                   descripTextFormField(),buildSaveButton()
                 ],
               ),
-            ),
           ]
         )
       )
@@ -72,7 +59,7 @@ Future<Null> chooseImage(ImageSource source) async {
       });
     } catch (e) {}
   }
-    Widget groupImage() => Row(
+Widget groupImage() => Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           IconButton(
@@ -83,27 +70,23 @@ Future<Null> chooseImage(ImageSource source) async {
             padding: const EdgeInsets.all(16.0),
             width: 250.0,
             height: 250,
-            child: file == null
-                ?Card(elevation: 5,
-                    color: const Color.fromARGB(255, 245, 244, 244),
-                    shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.0),
-          ),child:Container(
-              width: 70,
-              height: 70,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                image:AssetImage('assets/icons-add-camera.png'),
-                
-                alignment: Alignment.center,
+            child: file == null?
+              Card(elevation: 5,color: const Color.fromARGB(255, 245, 244, 244),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+                child:Container(
+                width: 70,
+                height: 70,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                  image:AssetImage('assets/icons-add-camera.png'),
+                  alignment: Alignment.center,
+                  )
+                  ),
                 )
-              ),
-            ))
-                : Container( 
+              ): Container( 
                   width: 70,
                   height: 70,
                   child: Image.file(file!))
-          ),
+                  ),
           IconButton(
             icon: const Icon(Icons.add_photo_alternate),
             onPressed: () => chooseImage(ImageSource.gallery),
@@ -206,6 +189,6 @@ Future<Null> chooseImage(ImageSource source) async {
                 return _collectionRef.doc((FirebaseAuth.instance.currentUser!.email))
                 .set(data)
                 .then((value) =>
-                Navigator.push(context, MaterialPageRoute(builder: (_)=> reviewPage())));
+                Navigator.push(context, MaterialPageRoute(builder: (_)=> ReviewPage())));
   }
 }

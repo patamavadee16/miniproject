@@ -21,11 +21,6 @@ class _ProfileState extends State<Profile> {
   TextEditingController ?_age ;
 File? file;
 
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +45,6 @@ File? file;
               width: 70,
               height: 70,
               child: file==null?Image.asset('assets/icons-account.png'):Container(child: Image.file(file!),width: 30,),
-
             ),IconButton(
             icon: const Icon(Icons.add_photo_alternate),
             onPressed: () => chooseImage(ImageSource.gallery),

@@ -7,14 +7,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:miniproject_1/reviewPage.dart';
 
-class editProfilePic extends StatefulWidget {
-  const editProfilePic({super.key});
+class EditProfilePic extends StatefulWidget {
+  const EditProfilePic({super.key});
 
   @override
-  State<editProfilePic> createState() => _editProfilePicState();
+  State<EditProfilePic> createState() => _EditProfilePicState();
 }
 
-class _editProfilePicState extends State<editProfilePic> {
+class _EditProfilePicState extends State<EditProfilePic> {
   final _form = GlobalKey<FormState>();
   TextEditingController title = TextEditingController();
   TextEditingController  description= TextEditingController();

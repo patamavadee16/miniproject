@@ -32,14 +32,14 @@ class _RegisterPageState extends State<RegisterPage> {
                   Text('Register Account',
                     style: const TextStyle(color: Color.fromARGB(255, 245, 	173,172 ),
                       fontSize: 30,
-                      fontFamily: 'FuzzyBubbles',
+                      fontFamily: 'Mitr',
                       fontWeight: FontWeight.bold,
                     ),
                   ), const SizedBox(height: 20,),
-                  const Text('Hello! Welcome to My Shop.',
+                  const Text('Hello! Welcome to Sodsai Shop.',
                     style: TextStyle(
                       fontSize: 20,
-                      fontFamily: 'FuzzyBubbles'
+                      fontFamily: 'Mitr'
                     ),
                   ), const SizedBox(height: 20,),
             Card(
@@ -152,18 +152,6 @@ class _RegisterPageState extends State<RegisterPage> {
     }
        }else
             print('Invalid Form');
-   
-        // print('Regis new Account');
-        // if (_formstate.currentState!.validate())
-        // print(email.text);
-        // print(password.text);
-        // final _user = await auth.createUserWithEmailAndPassword(email: email.text.trim(), password: password.text.trim());
-        // _user.user!.sendEmailVerification();
-        // // ignore: use_build_context_synchronously
-        // Navigator.pushAndRemoveUntil(
-        //     context,
-        //     MaterialPageRoute(builder: (context) => const LoginPage()),
-        //     ModalRoute.withName('/'));
       },
       style: ElevatedButton.styleFrom(
       backgroundColor: const Color.fromARGB(255, 245, 	173,172 ),

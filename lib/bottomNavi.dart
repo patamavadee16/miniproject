@@ -8,13 +8,13 @@ import 'package:miniproject_1/profile_page.dart';
 import 'package:miniproject_1/reviewPage.dart';
 
 
-class Homepage extends StatefulWidget {
-  const Homepage({Key? key}) : super(key: key);
+class BottomNavi extends StatefulWidget {
+  const BottomNavi({Key? key}) : super(key: key);
   @override
-  _HomepageState createState() => _HomepageState();
+  _BottomNaviState createState() => _BottomNaviState();
 }
 
-class _HomepageState extends State<Homepage> {
+class _BottomNaviState extends State<BottomNavi> {
   final auth = FirebaseAuth.instance;
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
@@ -23,7 +23,7 @@ class _HomepageState extends State<Homepage> {
     Home(),
     Favourite(),
     Cart(),
-    reviewPage(),
+    ReviewPage(),
     Profile(),
   ];
 

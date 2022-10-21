@@ -4,14 +4,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:miniproject_1/showDetailPost.dart';
-class reviewPage extends StatefulWidget {
-  const reviewPage({super.key});
+class ReviewPage extends StatefulWidget {
+  const ReviewPage({super.key});
 
   @override
-  State<reviewPage> createState() => _reviewPageState();
+  State<ReviewPage> createState() => _ReviewPageState();
 }
 
-class _reviewPageState extends State<reviewPage> {
+class _ReviewPageState extends State<ReviewPage> {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
