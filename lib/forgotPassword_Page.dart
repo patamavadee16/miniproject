@@ -2,14 +2,14 @@ import 'package:miniproject_1/login_Page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class ForgetPasswordPage extends StatefulWidget {
-  const ForgetPasswordPage({Key? key}) : super(key: key);
+class ForgotPasswordPage extends StatefulWidget {
+  const ForgotPasswordPage({Key? key}) : super(key: key);
 
   @override
-  _ForgetPasswordPage createState() => _ForgetPasswordPage();
+  _ForgotPasswordPage createState() => _ForgotPasswordPage();
 }
 
-class _ForgetPasswordPage extends State<ForgetPasswordPage> {
+class _ForgotPasswordPage extends State<ForgotPasswordPage> {
   final _formstate = GlobalKey<FormState>();
   TextEditingController email = TextEditingController();
 

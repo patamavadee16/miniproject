@@ -29,10 +29,11 @@ class _ShowDetail extends State<ShowDetail> {
               title: const Text('Detail.',
                         style: TextStyle(color: Color.fromARGB(255, 247, 247, 247),
                           fontSize: 30,
-                          fontFamily: 'FuzzyBubbles'
+                          fontFamily: 'Mitr'
                         ),
                       ),
             ),
+            
             body: snapshot.hasData
                 ? buildProductList(snapshot.data!)
                 : const Center(
@@ -51,7 +52,7 @@ class _ShowDetail extends State<ShowDetail> {
         String title = model['clothingNameEng'] + '  ' + model['clothingNameThai'];
         return Column(
           children: [
-           Text(title,style: TextStyle( fontWeight: FontWeight.bold,
+           Text(model['clothingNameEng'],style: TextStyle( fontFamily: 'Mitr',
                   fontSize: 25,)),
                   
             CarouselSlider(
@@ -78,15 +79,25 @@ class _ShowDetail extends State<ShowDetail> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title,style: TextStyle( fontWeight: FontWeight.bold,
-                  fontSize: 25,)),
-                 
-                  Text('Price : '+model['price'].toString()+' ฿'),
-                  Text('Color : '+model['color']),
-                  Text('Size : '+model['size']),
-                  Text('Meterial: '+model['meterial']),
-                  Text('description: '+model['description']),
-                  SizedBox(height: 20,),
+                  ListTile(
+                    leading:Text(model['clothingNameThai'],style: const TextStyle(
+                  fontSize: 25,
+                  fontFamily: 'Mitr')), 
+                  trailing: IconButton(onPressed: (){addToFav(model);},
+                  icon:data.docs.length==0?Icon(
+                      Icons.favorite_outline,
+                      color: Colors.white,
+                    ):Icon(
+                      Icons.favorite,
+                      color: Colors.red)),),
+        
+                
+                  Text('Price : ${model['price']} ฿',style: textStyle()),
+                  Text('Color : '+model['color'],style: textStyle()),
+                  Text('Size : '+model['size'],style: textStyle()),
+                  Text('Meterial: '+model['meterial'],style: textStyle()),
+                  Text('description: '+model['description'],style: textStyle()),
+                  const SizedBox(height: 20,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -112,6 +123,36 @@ class _ShowDetail extends State<ShowDetail> {
     
   }
 
+  TextStyle textStyle() {
+    return TextStyle(
+                fontSize: 13,
+                fontFamily: 'Mitr');
+  }
+Future addToFav(QueryDocumentSnapshot<Object?> document) async {
+   
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    var currentUser = _auth.currentUser;
+    
+    CollectionReference _collectionRef =
+        FirebaseFirestore.instance.collection("users-fav-items");
+    return _collectionRef
+        .doc(currentUser!.email)
+        .collection("items")
+        .doc(document['clothingID'])
+        .set({
+      "emailUser":FirebaseAuth.instance.currentUser?.email, 
+      "clothingID":document['clothingID'],
+      "clothingNameEng":document['clothingNameEng'],
+      "clothingNameThai":document['clothingNameThai'],
+      "color":document['color'],
+      "imageUrl":document['imageUrl'],
+      "imageUrl_2":document['imageUrl_2'],
+      "meterial":document['meterial'],
+      "price":document['price'],
+      "size":document['size']
+
+    }).then((value) => print("Added to Fav"));
+  }
   IconButton addtoCart_click(model) {
     return IconButton(onPressed: (){
                       addToCart(model);
@@ -126,10 +167,11 @@ class _ShowDetail extends State<ShowDetail> {
     CollectionReference _collectionRef =
         FirebaseFirestore.instance.collection("users-cart-items");
     return _collectionRef
-        .doc(currentUser!.email)
+        .doc(FirebaseAuth.instance.currentUser?.email)
         .collection("items")
         .doc(model['clothingID'])
         .set({
+      "emailUser":FirebaseAuth.instance.currentUser?.email,
       "clothingID":model['clothingID'],
       "clothingNameEng":model['clothingNameEng'],
       "clothingNameThai":model['clothingNameThai'],
@@ -140,7 +182,6 @@ class _ShowDetail extends State<ShowDetail> {
       "meterial":model['meterial'],
       "price":model['price'],
       "size":model['size'],
-      "count":model['count']+1,
 
     }).then((value) => print("Added to cart"));
   }

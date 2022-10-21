@@ -23,10 +23,7 @@ class _FavouriteState extends State<Favourite> {
 }
 Widget fetchData (String collectionName){
   return StreamBuilder(
-    stream: FirebaseFirestore.instance
-        .collection(collectionName)
-        .doc(FirebaseAuth.instance.currentUser!.email)
-        .collection("items")
+    stream: FirebaseFirestore.instance.collection('users-fav-items').doc(FirebaseAuth.instance.currentUser?.email).collection('items').where('emailUser', isEqualTo:(FirebaseAuth.instance.currentUser?.email) )
         .snapshots(),
     builder:
         (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {

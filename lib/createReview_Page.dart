@@ -203,7 +203,7 @@ Future<Null> chooseImage(ImageSource source) async {
 
               CollectionReference _collectionRef = FirebaseFirestore.instance.collection("users-review-post");
             //  print(_firstname.toString());
-                return _collectionRef.doc()
+                return _collectionRef.doc((FirebaseAuth.instance.currentUser!.email))
                 .set(data)
                 .then((value) =>
                 Navigator.push(context, MaterialPageRoute(builder: (_)=> reviewPage())));

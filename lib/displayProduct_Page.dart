@@ -33,7 +33,8 @@ class _displayProductState extends State<displayProduct> {
       //   child: _widgetOptions.elementAt(_selectedIndex),
       // ),
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('clothing').snapshots(),
+        stream: FirebaseFirestore.instance.collection('users-cart-items').doc(FirebaseAuth.instance.currentUser?.email).collection('items').where('emailUser', isEqualTo:(FirebaseAuth.instance.currentUser?.email) )
+        .snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if(!snapshot.hasData){
             return Center(child: CircularProgressIndicator(),);

@@ -1,14 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:miniproject_1/favorite_Page.dart';
 import 'package:miniproject_1/cart_Page.dart';
-import 'package:miniproject_1/displayProduct_Page.dart';
 import 'package:miniproject_1/drawer.dart';
 import 'package:miniproject_1/home_Page.dart';
-import 'package:miniproject_1/login_Page.dart';
 import 'package:miniproject_1/profile_page.dart';
-import 'package:miniproject_1/createReview_Page.dart';
 import 'package:miniproject_1/reviewPage.dart';
 
 
@@ -46,7 +42,7 @@ class _HomepageState extends State<Homepage> {
           child: Text('My Shop',
                           style: TextStyle(color: Color.fromARGB(255, 255, 255, 255),
                             fontSize: 30,
-                            fontFamily: 'FuzzyBubbles'
+                            fontFamily: 'Mitr'
                           ),
                         ),
         ),

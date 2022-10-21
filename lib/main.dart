@@ -38,10 +38,10 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => LoginPage(),
+         '/': (context) => LoginPage(),
          '/register': (context) => RegisterPage(),
          '/homepage': (context) => Homepage(),
-         '/forgotPasswordPage': (context) => ForgetPasswordPage(),
+         '/forgotPasswordPage': (context) => ForgotPasswordPage(),
          '/displayProductPage': (context) => displayProduct(),
          '/Favourite': (context) => Favourite(),
          '/Cart': (context) => Cart(),

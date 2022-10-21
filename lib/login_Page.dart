@@ -107,7 +107,11 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   ),
                   const SizedBox(height: 20,),
-                  button(),
+                  Row(
+                    children: [
+                      Expanded(child: loginButton()),
+                    ],
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -122,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                         const Text("Don't have account?",
                           style: TextStyle(
                           fontSize: 15,
-                          fontWeight: FontWeight.bold
+                          fontFamily: 'Mitr'
                           ),
                         ),
                         registerButton( context),
@@ -140,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  ElevatedButton button() {
+  ElevatedButton loginButton() {
     return ElevatedButton(
           onPressed: () async {
           if (_formstate.currentState!.validate()) {
@@ -188,7 +192,8 @@ class _LoginPageState extends State<LoginPage> {
       // ignore: prefer_const_constructors
       child: Text('Forgot Password?',
         style: TextStyle(
-          color: Color.fromARGB(255, 216,78,78)
+          color: Color.fromARGB(255, 216,78,78),
+          fontFamily: 'Mitr'
           ),
         ),
       onPressed: () {
@@ -202,7 +207,8 @@ class _LoginPageState extends State<LoginPage> {
       // ignore: prefer_const_constructors
       child: Text('Register Now',
         style: const TextStyle(
-          color: Color.fromARGB(255, 216,78,78)
+          color: Color.fromARGB(255, 216,78,78),
+          fontFamily: 'Mitr'
           ),
         ),
       onPressed: () {

@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "644074529877",
-    "project_id": "miniproject-flutter-276df",
-    "storage_bucket": "miniproject-flutter-276df.appspot.com"
+    "project_number": "51707030493",
+    "project_id": "miniproject-c5cd8",
+    "storage_bucket": "miniproject-c5cd8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:644074529877:android:172424ff5c9edfe4a460dc",
+        "mobilesdk_app_id": "1:51707030493:android:352ab32556071f571ca434",
         "android_client_info": {
           "package_name": "com.example.miniproject_1"
         }
       },
       "oauth_client": [
         {
-          "client_id": "644074529877-4lgf6hf7125npr9k8a4nn6jamv4jvuko.apps.googleusercontent.com",
+          "client_id": "51707030493-00d2jsllc54h13a4ukcdf3r629nubo06.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBE1Ag6oTYLA-5rzgF9BSPnjf5FCRjuZAY"
+          "current_key": "AIzaSyBtyzGkJZDR1R8QZkzuy9LzehAjYRT3Lro"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "644074529877-4lgf6hf7125npr9k8a4nn6jamv4jvuko.apps.googleusercontent.com",
+              "client_id": "51707030493-00d2jsllc54h13a4ukcdf3r629nubo06.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
