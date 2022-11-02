@@ -5,7 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:miniproject_1/reviewPage.dart';
+import 'package:miniproject_1/bottomNavi.dart';
 
 class CreateReviewPost extends StatefulWidget {
   const CreateReviewPost({super.key});
@@ -24,7 +24,7 @@ class _CreateReviewPostState extends State<CreateReviewPost> {
     return Scaffold(
     appBar: AppBar(
               backgroundColor: Color.fromARGB(255, 245, 	173,172 ),
-              title: const Text('My Shop',style: TextStyle(color: Color.fromARGB(255, 247, 247, 247),fontSize: 30,fontFamily: 'FuzzyBubbles'))
+              title: const Text('Sodsai Shop',style: TextStyle(color: Color.fromARGB(255, 247, 247, 247),fontSize: 30,fontFamily: 'Mitr'))
             ),
     body:  Form(
       key: _form,
@@ -105,9 +105,9 @@ Widget groupImage() => Row(
       },
       keyboardType: TextInputType.text,
       decoration:  InputDecoration(
-        labelText: 'Title',
+        labelText: 'Name Item',
         icon: const Icon(Icons.title_rounded),
-        hintText: ('Title'),
+        hintText: ('ชื่อสินค้า'),
         border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(20),
         )
@@ -116,6 +116,8 @@ Widget groupImage() => Row(
   }        
   TextFormField descripTextFormField() {
     return TextFormField(
+      minLines: 5,
+      maxLines: null,
       controller: description,
       validator: (value) {
         if (value!.isEmpty) {
@@ -126,7 +128,7 @@ Widget groupImage() => Row(
       },
       keyboardType: TextInputType.text,
       decoration:  InputDecoration(
-        labelText: 'Description',
+        labelText: 'Comment',
         icon: const Icon(Icons.text_snippet_sharp),
         hintText: ('Share your review'),
         border: OutlineInputBorder(
@@ -189,6 +191,6 @@ Widget groupImage() => Row(
                 return _collectionRef.doc((FirebaseAuth.instance.currentUser!.email))
                 .set(data)
                 .then((value) =>
-                Navigator.push(context, MaterialPageRoute(builder: (_)=> ReviewPage())));
+                Navigator.push(context, MaterialPageRoute(builder: (_)=> BottomNavi())));
   }
 }

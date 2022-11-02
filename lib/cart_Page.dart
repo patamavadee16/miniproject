@@ -53,7 +53,7 @@ class _CartState extends State<Cart> {
                             .delete();
                               }, icon: const Icon(Icons.delete),
                             ),
-                          onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context)=> ShowDetail(document['clothingNameThai'])));},
+                          onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context)=> ShowDetail(document['clothingID'])));},
                         ),
                         Divider()
                       ]

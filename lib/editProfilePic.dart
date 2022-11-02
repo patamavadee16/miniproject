@@ -24,10 +24,10 @@ class _EditProfilePicState extends State<EditProfilePic> {
     return Scaffold(
     appBar: AppBar(
               backgroundColor: Color.fromARGB(255, 245, 	173,172 ),
-              title: const Text('My Shop',
+              title: const Text('Edit Profile Picture',
                         style: TextStyle(color: Color.fromARGB(255, 247, 247, 247),
-                          fontSize: 30,
-                          fontFamily: 'FuzzyBubbles'
+                          fontSize: 25,
+                          fontFamily: 'Mitr'
                         ),
                       ),
             ),
@@ -93,18 +93,7 @@ Future<Null> chooseImage(ImageSource source) async {
         
         onPressed: () async {
            print('save button press');
-           uploadPost();
-          // if (_form.currentState!.validate()) {
-          //   if(file!=null){
-          //      uploadPost();
-          //      }else{ScaffoldMessenger.of(context).showSnackBar(
-          //       const SnackBar(
-          //         content: const Text('Please choose picture')
-          //       ),
-          //     );
-          //     }
-          //   }
-
+           uploadPic();
           } ,
 
      style: ElevatedButton.styleFrom(
@@ -113,14 +102,14 @@ Future<Null> chooseImage(ImageSource source) async {
       child: const Text('Save',style:TextStyle(color: Colors.white,fontSize: 20)
        ),);
   }
-  Future uploadPost()async{
+  Future uploadPic()async{
      Random random = Random();
     int i = random.nextInt(100);
     final path = 'ProfilePicture/$i.jpg';
    final ref =FirebaseStorage.instance.ref().child(path);
     final storageUploadTask = ref.putFile(file!);
     print('$path');
-    print('post$i.jpg');
+    print('pic$i.jpg');
     final snapshot = await storageUploadTask.whenComplete(() {});
 
   final urlPicture = await snapshot.ref.getDownloadURL();

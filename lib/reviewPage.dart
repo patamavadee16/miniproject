@@ -27,9 +27,6 @@ class _ReviewPageState extends State<ReviewPage> {
       //           icon: const Icon(Icons.logout))
       //     ],
       // ),
-      // body: Center(
-      //   child: _widgetOptions.elementAt(_selectedIndex),
-      // ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('users-review-post').snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {

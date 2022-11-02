@@ -37,17 +37,11 @@ File? file;
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [IconButton(
-            icon: const Icon(Icons.add_a_photo),
-            onPressed: () => chooseImage(ImageSource.camera),
-          ),
-                    Container(
-              width: 70,
-              height: 70,
-              child: file==null?Image.asset('assets/icons-account.png'):Container(child: Image.file(file!),width: 30,),
-            ),IconButton(
-            icon: const Icon(Icons.add_photo_alternate),
-            onPressed: () => chooseImage(ImageSource.gallery),
+                  children: [
+                    Image.asset('assets/icons-account.png'),
+                  IconButton(
+            icon: const Icon(Icons.edit_outlined),
+            onPressed: () {Navigator.pushNamed(context, '/editProfilePic');},
           ),
                   ],
                 ),  
@@ -57,7 +51,7 @@ File? file;
                     const Text('Profile',
                         style: TextStyle(color: Color.fromARGB(255, 245, 	173,172 ),
                           fontSize: 50,
-                          fontFamily: 'FuzzyBubbles'
+                          fontFamily: 'Mitr'
                         ),
                       ),
                     IconButton(onPressed: (){Navigator.pushNamed(context, '/editProfile_page');}, icon: Icon(Icons.edit_outlined),)     

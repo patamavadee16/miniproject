@@ -26,7 +26,6 @@ class _HomeState extends State<Home> {
         _carouselImages.add(
           qn.docs[i]["img-path"],
         );
-        print(qn.docs[i]["img-path"]);
       }
     });
 
@@ -61,34 +60,34 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: Container(
+      body: Container(
+        padding: EdgeInsets.only(top: 16),
         child: Column(
           children: [
-            Padding(
-              padding: EdgeInsets.only(left: 20, right: 20,top: 10),
-              child: TextFormField(
-                readOnly: true,
-                decoration: const InputDecoration(
-                  icon: const Icon(Icons.search),
-                  fillColor: Colors.white,
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide: BorderSide(color: Color.fromARGB(255, 245, 	173,172 ))),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide: BorderSide(color: Colors.grey)),
-                  hintText: "Search products here",
-                  hintStyle: TextStyle(fontSize: 15),
-                ),
-                onTap: () {Navigator.push(context,
-                    CupertinoPageRoute(builder: (_) => SearchScreen())
-              );},
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
+            // Padding(
+            //   padding: EdgeInsets.only(left: 20, right: 20,top: 10),
+            //   child: TextFormField(
+            //     readOnly: true,
+            //     decoration: const InputDecoration(
+            //       icon: const Icon(Icons.search),
+            //       fillColor: Colors.white,
+            //       focusedBorder: OutlineInputBorder(
+            //           borderRadius: BorderRadius.all(Radius.circular(10)),
+            //           borderSide: BorderSide(color: Color.fromARGB(255, 245, 	173,172 ))),
+            //       enabledBorder: OutlineInputBorder(
+            //           borderRadius: BorderRadius.all(Radius.circular(10)),
+            //           borderSide: BorderSide(color: Colors.grey)),
+            //       hintText: "Search products here",
+            //       hintStyle: TextStyle(fontSize: 15),
+            //     ),
+            //     onTap: () {Navigator.push(context,
+            //         CupertinoPageRoute(builder: (_) => SearchScreen())
+            //   );},
+            //   ),
+            // ),
+            // const SizedBox(
+            //   height: 10,
+            // ),
             AspectRatio(
               aspectRatio: 3.5,
               child: CarouselSlider(
@@ -107,7 +106,7 @@ class _HomeState extends State<Home> {
                       autoPlay: true,
                       enlargeCenterPage: true,
                       viewportFraction: 0.8,
-                      enlargeStrategy: CenterPageEnlargeStrategy.height,
+
                       onPageChanged: (val, carouselPageChangedReason) {
                         setState(() {
                           _dotPosition = val;
@@ -170,7 +169,7 @@ class _HomeState extends State<Home> {
             ),
           ],
         ),
-      )),
+      ),
     );
   }
 }

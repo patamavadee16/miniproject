@@ -29,7 +29,7 @@ class _ShowDetail extends State<ShowDetailPost> {
               title: const Text('Review Post',
                         style: TextStyle(color: Color.fromARGB(255, 247, 247, 247),
                           fontSize: 30,
-                          fontFamily: 'FuzzyBubbles'
+                          fontFamily: 'Mitr'
                         ),
                       ),
             ),
@@ -65,31 +65,34 @@ class _ShowDetail extends State<ShowDetailPost> {
                 children: [ 
                   Text(model['title'],
                     style: const TextStyle( 
-                      fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      fontFamily: 'Itim')
+                      fontFamily: 'Mitr')
                       ),
-                  Card(
-                  margin: EdgeInsets.only(left: 40,right: 40,top:20),
-                  elevation: 5,
-                  color: Color.fromARGB(255, 245, 244, 244),
-                  shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.0),
-                  ),
-                  child  : 
-                      ListTile(
-                        subtitle:  Text(model['desciption'],
+                      Text(model['desciption'],
                         style: const TextStyle(
                         fontSize: 20,
-                        fontFamily: 'Itim'))),
+                        fontFamily: 'Itim')),
+                  // Card(
+                  // margin: EdgeInsets.only(left: 40,right: 40,top:20),
+                  // elevation: 5,
+                  // color: Color.fromARGB(255, 245, 244, 244),
+                  // shape: RoundedRectangleBorder(
+                  // borderRadius: BorderRadius.circular(12.0),
+                  // ),
+                  // child  : 
+                  //     ListTile(
+                  //       subtitle:  Text(model['desciption'],
+                  //       style: const TextStyle(
+                  //       fontSize: 20,
+                  //       fontFamily: 'Itim'))),
            
-                  )
-                  ,const Text('Create your review >',
-                        style: TextStyle(color: Color.fromARGB(255, 245, 	173,172 ),
-                          fontSize: 30,
-                          fontFamily: 'FuzzyBubbles'
-                        ),
-                      ),Image.asset('assets/icons8-cart-64.png')
+                  // )
+                  // ,const Text('Create your review >',
+                  //       style: TextStyle(color: Color.fromARGB(255, 245, 	173,172 ),
+                  //         fontSize: 30,
+                  //         fontFamily: 'FuzzyBubbles'
+                  //       ),
+                  //     ),Image.asset('assets/icons8-cart-64.png')
                 ],
               ),
             )

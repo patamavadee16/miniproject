@@ -17,6 +17,7 @@ class _EditProfileState extends State<EditProfile> {
   TextEditingController ?_phone;
   TextEditingController ?_age;
   File? file;
+  
   setDataToTextField(data){
     return  Form(
       key: _formstate,
@@ -44,7 +45,7 @@ class _EditProfileState extends State<EditProfile> {
             style: ElevatedButton.styleFrom(
           primary:const Color.fromARGB(255, 245, 	173,172 ),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),),
-     child: Text("Update"));
+     child: Text("Update",style: TextStyle(color: Colors.white,fontSize: 20),));
   }
 
   TextFormField phoneField(data) {
@@ -154,6 +155,10 @@ class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+              backgroundColor: Color.fromARGB(255, 245, 	173,172 ),
+              title: const Text('Edit Profile',style: TextStyle(color: Color.fromARGB(255, 247, 247, 247),fontSize: 30,fontFamily: 'Mitr'))
+            ),
       body: SafeArea(child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: StreamBuilder(

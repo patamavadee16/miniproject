@@ -15,11 +15,22 @@ class _OrderPageState extends State<OrderPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: ,
+    
       body: SafeArea(
-        child: fetchData("users-order-items"),
+        child: fetchData("order"),
       ),
     );
+  }
+    StreamBuilder<DocumentSnapshot<Map<String, dynamic>>> data(String filed) {
+    return StreamBuilder(
+                stream: FirebaseFirestore.instance.collection("order").doc(FirebaseAuth.instance.currentUser!.email).snapshots(),
+                builder: (context, AsyncSnapshot snapshot){
+                  if (snapshot.hasData) {
+              return Text(snapshot.data[filed]);
+              
+                } else {
+              return CircularProgressIndicator();
+            }});
   }
 }
 Widget fetchData (String collectionName){
@@ -86,4 +97,5 @@ Widget fetchData (String collectionName){
           });
     },
   );
+  
 }

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:miniproject_1/bottomNavi.dart';
 import 'package:miniproject_1/order_Page.dart';
@@ -10,36 +12,76 @@ class SharedDrawer extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: [
-          Container(
-            padding: EdgeInsets.only(top: 15),
-            height: 200,
-            color:  Color.fromARGB(255, 245, 	173,172 ),
-            child: Column(
-              // ignore: prefer_const_literals_to_create_immutables
-              children: <Widget>[
-               
-                const CircleAvatar(
-                  // radius: 70,
-                  maxRadius: 70,
-                  minRadius: 30,
-                  backgroundColor: Colors.grey,
-                ),
-                 
-                const SizedBox(height: 10),
-                // Expanded(
-                //   child: Text(
-                //     authData == null ? 'userName' : authData.email,
-                //     style: TextStyle(
-                //       color: Colors.white,
-                //       fontSize: 17,
-                //       fontWeight: FontWeight.bold,
-                //     ),
-                //   ),
-                // )
-              ],
-            ),
+          DrawerHeader(
+            padding: EdgeInsets.zero,
+            child: 
+        
+          UserAccountsDrawerHeader(accountEmail: data('email'), 
+          accountName: data('firstname'),
+           currentAccountPicture: Container(
+            child: StreamBuilder(
+                  stream: FirebaseFirestore.instance.collection("users-form-data").doc(FirebaseAuth.instance.currentUser!.email).snapshots(),
+                  builder: (context, AsyncSnapshot snapshot){
+                    var data = snapshot.data;
+                    if (snapshot.hasData) {
+                return Container(
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(60),
+                    image: data['url_picture']==""?DecorationImage(image: AssetImage('assets/icons-account.png'),fit: BoxFit.cover):DecorationImage(image: NetworkImage(data['url_picture']),fit: BoxFit.cover)
+                    ),
+                );
+                
+                  } else {
+                return CircularProgressIndicator();
+              }}),
           ),
-          const SizedBox(height: 10),
+          decoration: 
+            const BoxDecoration(
+              color: Color.fromARGB(255, 245, 	173,172 ),
+            ),
+          ),),
+          
+          // Container(
+          //   padding: EdgeInsets.only(top: 15),
+          //   height: 200,
+          //   color:  Color.fromARGB(255, 245, 	173,172 ),
+          //   child: Column(
+          //     // ignore: prefer_const_literals_to_create_immutables
+          //     children: <Widget>[
+          //       StreamBuilder(
+          //         stream: FirebaseFirestore.instance.collection("users-form-data").doc(FirebaseAuth.instance.currentUser!.email).snapshots(),
+          //         builder: (context, AsyncSnapshot snapshot){
+          //           var data = snapshot.data;
+          //           if(data!=null){
+          //           return Column(
+          //             children: [
+          //          CircleAvatar(    
+          //         maxRadius: 60,
+          //         backgroundColor: Colors.grey,
+          //         child:data['url_picture']==""?Container(
+          //           decoration: BoxDecoration(borderRadius: BorderRadius.circular(60),
+          //           image: DecorationImage(image: AssetImage('assets/icons-account.png'),fit: BoxFit.cover)
+          //           ),)
+          //         :Container(
+          //           decoration: BoxDecoration(borderRadius: BorderRadius.circular(60),
+          //           image: DecorationImage(image: NetworkImage(data['url_picture']),fit: BoxFit.cover)
+          //           ),)
+                    
+          //       ),SizedBox(height: 10,),Text(data['firstname']+data['lastname'])
+
+          //             ],
+          //           );
+          //   }
+          //           return Column(
+          //             children: [
+          //             ],
+          //           );
+          //         }),
+        
+                 
+          //       const SizedBox(height: 10),
+          //     ],
+          //   ),
+          // ),
           ListTile(
             leading: Icon(Icons.home),
             trailing: Icon(Icons.navigate_next),
@@ -67,82 +109,25 @@ class SharedDrawer extends StatelessWidget {
               ),
             ),
             onTap: () {Navigator.pushNamed(context, '/orderPage');
-              // Navigator.pushReplacementNamed(context, OrdersScreen.routeName);
             },
           ),
-          // Divider(),
-          // ListTile(
-          //   leading: Icon(Icons.edit),
-          //   trailing: Icon(Icons.navigate_next),
-          //   title: Text(
-          //     'Manage Meals ',
-          //     style: TextStyle(
-          //       fontSize: 17,
-          //     ),
-          //   ),
-          //   onTap: () {
-          //     // Navigator.pushReplacementNamed(context, ManageScreen.routeName);
-          //   },
-          // ),
-          // Divider(),
-          // ListTile(
-          //   leading: Icon(Icons.contacts),
-          //   trailing: Icon(Icons.navigate_next),
-          //   title: Text(
-          //     'Contact Us ',
-          //     style: TextStyle(
-          //       fontSize: 17,
-          //     ),
-          //   ),
-          //   onTap: () {},
-          // ),
-          // Divider(),
-          // ListTile(
-          //   leading: Icon(Icons.help),
-          //   trailing: Icon(Icons.navigate_next),
-          //   title: Text(
-          //     'Help ',
-          //     style: TextStyle(
-          //       fontSize: 17,
-          //     ),
-          //   ),
-          //   onTap: () {},
-          // ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.settings),
-            trailing: Icon(Icons.navigate_next),
-            // ignore: prefer_const_constructors
-            title: Text(
-              'Setting',
-              style: TextStyle(
-                fontSize: 17,
-              ),
-            ),
-            onTap: () {
-              Navigator.pushNamed(context, '/homepage');
-            },
-          ),
-          Divider(),
-          // ListTile(
-          //   leading: Icon(Icons.exit_to_app),
-          //   trailing: Icon(Icons.navigate_next),
-          //   title: Text(
-          //     'Log Out ',
-          //     style: TextStyle(
-          //       fontSize: 17,
-          //     ),
-          //   ),
-          //   onTap: () {
-          //     Navigator.of(context).pop();
-          //     Navigator.of(context).pushReplacementNamed('/');
-          //     //////////////////////////////////////////////////
-          //     // authData.logOut();
-          //   },
-          // ),
           Divider(),
         ],
       ),
     );
   }
+
+  StreamBuilder<DocumentSnapshot<Map<String, dynamic>>> data(String filed) {
+    return StreamBuilder(
+                stream: FirebaseFirestore.instance.collection("users-form-data").doc(FirebaseAuth.instance.currentUser!.email).snapshots(),
+                builder: (context, AsyncSnapshot snapshot){
+                  if (snapshot.hasData) {
+              return Text(snapshot.data[filed]);
+              
+                } else {
+              return CircularProgressIndicator();
+            }});
+  }
+
 }
+

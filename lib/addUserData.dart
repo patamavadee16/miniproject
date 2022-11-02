@@ -83,6 +83,7 @@ class _UserFormState extends State<UserForm> {
                "gender":choosSex.toString(),
                "age":_age.text,
                'url_picture':"",
+               "email":FirebaseAuth.instance.currentUser!.email
             };
             try {
               final FirebaseAuth _auth = FirebaseAuth.instance;

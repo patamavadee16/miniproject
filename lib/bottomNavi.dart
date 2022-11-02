@@ -39,7 +39,7 @@ class _BottomNaviState extends State<BottomNavi> {
       drawer: SharedDrawer(),
       appBar: AppBar(
         title: const Center(
-          child: Text('My Shop',
+          child: Text('Sodsai Shop',
                           style: TextStyle(color: Color.fromARGB(255, 255, 255, 255),
                             fontSize: 30,
                             fontFamily: 'Mitr'
