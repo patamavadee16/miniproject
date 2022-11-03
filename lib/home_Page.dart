@@ -1,9 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:miniproject_1/search_Page.dart';
 import 'package:miniproject_1/showdetail.dart';
 
 class Home extends StatefulWidget {
@@ -64,30 +62,6 @@ class _HomeState extends State<Home> {
         padding: EdgeInsets.only(top: 16),
         child: Column(
           children: [
-            // Padding(
-            //   padding: EdgeInsets.only(left: 20, right: 20,top: 10),
-            //   child: TextFormField(
-            //     readOnly: true,
-            //     decoration: const InputDecoration(
-            //       icon: const Icon(Icons.search),
-            //       fillColor: Colors.white,
-            //       focusedBorder: OutlineInputBorder(
-            //           borderRadius: BorderRadius.all(Radius.circular(10)),
-            //           borderSide: BorderSide(color: Color.fromARGB(255, 245, 	173,172 ))),
-            //       enabledBorder: OutlineInputBorder(
-            //           borderRadius: BorderRadius.all(Radius.circular(10)),
-            //           borderSide: BorderSide(color: Colors.grey)),
-            //       hintText: "Search products here",
-            //       hintStyle: TextStyle(fontSize: 15),
-            //     ),
-            //     onTap: () {Navigator.push(context,
-            //         CupertinoPageRoute(builder: (_) => SearchScreen())
-            //   );},
-            //   ),
-            // ),
-            // const SizedBox(
-            //   height: 10,
-            // ),
             AspectRatio(
               aspectRatio: 3.5,
               child: CarouselSlider(

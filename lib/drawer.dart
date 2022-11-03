@@ -8,7 +8,6 @@ import 'package:miniproject_1/order_Page.dart';
 class SharedDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // final authData = Provider.of<Auth>(context, listen: false);
     return Drawer(
       child: ListView(
         children: [
@@ -39,49 +38,6 @@ class SharedDrawer extends StatelessWidget {
               color: Color.fromARGB(255, 245, 	173,172 ),
             ),
           ),),
-          
-          // Container(
-          //   padding: EdgeInsets.only(top: 15),
-          //   height: 200,
-          //   color:  Color.fromARGB(255, 245, 	173,172 ),
-          //   child: Column(
-          //     // ignore: prefer_const_literals_to_create_immutables
-          //     children: <Widget>[
-          //       StreamBuilder(
-          //         stream: FirebaseFirestore.instance.collection("users-form-data").doc(FirebaseAuth.instance.currentUser!.email).snapshots(),
-          //         builder: (context, AsyncSnapshot snapshot){
-          //           var data = snapshot.data;
-          //           if(data!=null){
-          //           return Column(
-          //             children: [
-          //          CircleAvatar(    
-          //         maxRadius: 60,
-          //         backgroundColor: Colors.grey,
-          //         child:data['url_picture']==""?Container(
-          //           decoration: BoxDecoration(borderRadius: BorderRadius.circular(60),
-          //           image: DecorationImage(image: AssetImage('assets/icons-account.png'),fit: BoxFit.cover)
-          //           ),)
-          //         :Container(
-          //           decoration: BoxDecoration(borderRadius: BorderRadius.circular(60),
-          //           image: DecorationImage(image: NetworkImage(data['url_picture']),fit: BoxFit.cover)
-          //           ),)
-                    
-          //       ),SizedBox(height: 10,),Text(data['firstname']+data['lastname'])
-
-          //             ],
-          //           );
-          //   }
-          //           return Column(
-          //             children: [
-          //             ],
-          //           );
-          //         }),
-        
-                 
-          //       const SizedBox(height: 10),
-          //     ],
-          //   ),
-          // ),
           ListTile(
             leading: Icon(Icons.home),
             trailing: Icon(Icons.navigate_next),

@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:miniproject_1/favorite_Page.dart';
 import 'package:miniproject_1/cart_Page.dart';
 import 'package:miniproject_1/drawer.dart';
 import 'package:miniproject_1/home_Page.dart';
@@ -21,7 +20,6 @@ class _BottomNaviState extends State<BottomNavi> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     Home(),
-    Favourite(),
     Cart(),
     ReviewPage(),
     Profile(),
@@ -68,10 +66,6 @@ class _BottomNaviState extends State<BottomNavi> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favorite',
           ),BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
             label: 'Cart',

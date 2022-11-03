@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -13,8 +17,57 @@ class _LoginPageState extends State<LoginPage> {
   String? email;
   String? password;
   final auth = FirebaseAuth.instance;
+  String? message;
+  String channelId = "1000";
+  String channelName = "FLUTTER_NOTIFICATION_CHANNEL";
+  String channelDescription = "FLUTTER_NOTIFICATION_CHANNEL_DETAIL";
+
 
   @override
+  initState() {
+    message = "No message.";
+
+    var initializationSettingsAndroid =
+        AndroidInitializationSettings('noti');
+
+    var initializationSettingsIOS = DarwinInitializationSettings(
+        onDidReceiveLocalNotification: (id, title, body, payload) async {
+      print("onDidReceiveLocalNotification called.");
+    });
+
+    var initializationSettings = InitializationSettings(
+        android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+
+    flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onDidReceiveNotificationResponse: (payload) async {
+      // when user tap on notification.
+      print("onSelectNotification called.");
+      setState(() {
+        message = payload.payload;
+      });
+    });
+
+    super.initState();
+  }
+  sendNotification() async {
+    var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
+      '10000',
+      'FLUTTER_NOTIFICATION_CHANNEL',
+      channelDescription: 'FLUTTER_NOTIFICATION_CHANNEL_DETAIL',
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+
+    var iOSPlatformChannelSpecifics = const DarwinNotificationDetails();
+
+    var platformChannelSpecifics = NotificationDetails(
+        android: androidPlatformChannelSpecifics,
+        iOS: iOSPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.show(
+        111, 'Sodsai shop', 'enjoy to shopping', platformChannelSpecifics,
+        payload: 'I just haven\'t Met You Yet');
+  }
+
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height;
@@ -104,6 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 const SizedBox(height: 10,),
+                
                 ],
               ),
             )
@@ -116,6 +170,7 @@ class _LoginPageState extends State<LoginPage> {
   ElevatedButton loginButton() {
     return ElevatedButton(
           onPressed: () async {
+            // sendNotification();
           if (_formstate.currentState!.validate()) {
             print('Valid Form');
             _formstate.currentState!.save();
@@ -125,6 +180,7 @@ class _LoginPageState extends State<LoginPage> {
                       email: email!, password: password!)
                   .then((value) {
                 if (value.user!.emailVerified) {
+                  sendNotification();
                   ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("Login Pass")));
                       Navigator.pushNamed(context, '/homepage');
@@ -151,6 +207,20 @@ class _LoginPageState extends State<LoginPage> {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),),
               child: const Text('Login',style: TextStyle(color: Colors.white),),
       );
+  }
+   TextButton no(BuildContext context) {
+    return TextButton(
+      // ignore: prefer_const_constructors
+      child: Text('Forgot Password?',
+        style: const TextStyle(
+          color: Color.fromARGB(255, 216,78,78),
+          fontFamily: 'Mitr'
+          ),
+        ),
+      onPressed: () {
+        sendNotification();
+      },
+    );
   }
 
   TextButton forgotPasswordButton(BuildContext context) {

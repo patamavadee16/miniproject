@@ -63,7 +63,7 @@ File? file;
                   color: Color.fromARGB(255, 245, 244, 244),
                   shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0),
-                  ),child :Column(
+                  ),child :SingleChildScrollView(child:    Column(
                   children: [
                     ListTile(
                       leading: Text("First Name"),
@@ -87,7 +87,8 @@ File? file;
                       trailing: Text(data['dateOfbirth']),
                     ),
                   ],
-                ),),
+                ),)
+               ),
               ],
             );
           },

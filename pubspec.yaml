@@ -47,6 +47,10 @@ dependencies:
   firebase_storage: ^10.3.11
   dots_indicator: ^2.1.0
   favorite_button: ^0.0.4
+  flutter_local_notifications: ^12.0.3
+  http: ^0.13.0
+  path_provider: ^2.0.1 
+
 
 dev_dependencies:
   flutter_test:
@@ -84,6 +88,7 @@ flutter:
    - assets/icons8-wavy-line-64.png
    - assets/icons8-cart-64.png
    - assets/logo1.png
+   - assets/face-scan.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

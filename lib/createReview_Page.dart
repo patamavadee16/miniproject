@@ -29,10 +29,10 @@ class _CreateReviewPostState extends State<CreateReviewPost> {
     body:  Form(
       key: _form,
       child:ListView(
-        padding: const EdgeInsets.only(left: 20,right: 20,top: 100),
+        padding: const EdgeInsets.only(left: 20,right: 20,top: 70),
         children:[
               Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   const Text('New Post',style:  TextStyle(color: Color.fromARGB(255, 245, 	173,172 ),fontSize: 50,fontFamily: 'Mitr'),),          groupImage(),
@@ -77,7 +77,7 @@ Widget groupImage() => Row(
                 height: 70,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                  image:AssetImage('assets/icons-add-camera.png'),
+                  image:AssetImage('assets/face-scan.png'),
                   alignment: Alignment.center,
                   )
                   ),

@@ -71,8 +71,8 @@ Future<Null> chooseImage(ImageSource source) async {
               height: 70,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                image:AssetImage('assets/icons-add-camera.png'),
-                
+                image:AssetImage('assets/face-scan.png'),
+                fit: BoxFit.cover,
                 alignment: Alignment.center,
                 )
               ),

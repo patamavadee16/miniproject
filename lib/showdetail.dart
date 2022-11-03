@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:favorite_button/favorite_button.dart';
+import 'package:miniproject_1/order_form.dart';
 
 class ShowDetail extends StatefulWidget {
   final String _idi; 
@@ -16,8 +16,7 @@ class ShowDetail extends StatefulWidget {
 
 class _ShowDetail extends State<ShowDetail> {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  late bool favorite;
-  // ProductsController producsController = ProductsController.instance;
+
   @override
   Widget build(BuildContext context) {
     String _id = widget._idi;
@@ -84,8 +83,9 @@ class _ShowDetail extends State<ShowDetail> {
                     leading:Text(model['clothingNameThai'],style: const TextStyle(
                   fontSize: 25,
                   fontFamily: 'Mitr')), 
-                  trailing: IconButton(onPressed: (){addToFav(model);},
-                  icon:Fav(),),),
+                  // trailing: IconButton(onPressed: (){addToFav(model);},
+                  // icon:Fav(),),
+                  ),
         
                 
                   Text('Price : ${model['price']} ฿',style: textStyle()),
@@ -119,47 +119,12 @@ class _ShowDetail extends State<ShowDetail> {
     
   }
 
-  FavoriteButton Fav() {
-    return FavoriteButton(
-              isFavorite: true,
-              // iconDisabledColor: Colors.white,
-              valueChanged: (_isFavorite) {
-                print('Is Favorite : $_isFavorite');
-                bool favorite = _isFavorite;
-              },
-            );
-  }
-
   TextStyle textStyle() {
     return TextStyle(
                 fontSize: 13,
                 fontFamily: 'Mitr');
   }
-Future addToFav(QueryDocumentSnapshot<Object?> document) async {
-   
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    var currentUser = _auth.currentUser;
-    
-    CollectionReference _collectionRef =
-        FirebaseFirestore.instance.collection("users-fav-items");
-    return _collectionRef
-        .doc(currentUser!.email)
-        .collection("items")
-        .doc(document['clothingID'])
-        .set({
-      "emailUser":FirebaseAuth.instance.currentUser?.email, 
-      "clothingID":document['clothingID'],
-      "clothingNameEng":document['clothingNameEng'],
-      "clothingNameThai":document['clothingNameThai'],
-      "color":document['color'],
-      "imageUrl":document['imageUrl'],
-      "imageUrl_2":document['imageUrl_2'],
-      "meterial":document['meterial'],
-      "price":document['price'],
-      "size":document['size']
 
-    }).then((value) => print("Added to Fav"));
-  }
   IconButton addtoCart_click(model) {
     return IconButton(onPressed: (){
                       addToCart(model);
@@ -197,7 +162,8 @@ Future addToFav(QueryDocumentSnapshot<Object?> document) async {
     return ElevatedButton(
       
       onPressed: () async {
-        
+        Navigator.push(context, MaterialPageRoute(builder: (_)=> OrderForm(model['clothingID'])));
+     
       },
       style: ElevatedButton.styleFrom(
         primary:Color.fromARGB(255, 245, 	173,172 ),
@@ -208,6 +174,7 @@ Future addToFav(QueryDocumentSnapshot<Object?> document) async {
           ),
     );
   }
+  
   Stream<QuerySnapshot> getProduct(String titleID) {
     // Firestore _firestore = Firestore.instance;
     return _firestore

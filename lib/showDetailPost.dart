@@ -44,60 +44,58 @@ class _ShowDetail extends State<ShowDetailPost> {
   }
 
   ListView buildProductList(QuerySnapshot data) {
-    return ListView.builder(
-
+    return ListView.builder(          
+          
       padding: EdgeInsets.all(16.0),
       itemCount: data.docs.length,
       itemBuilder: (BuildContext context, int index) {
         var model = data.docs.elementAt(index);
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [ 
-            Stack(
-              children: [
-                Image.network(model['url_picture'],),
-                IconButton(onPressed: (){addToFav();}, icon: const Icon(Icons.favorite))],),
-            Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [ 
-                  Text(model['title'],
-                    style: const TextStyle( 
-                      fontSize: 20,
-                      fontFamily: 'Mitr')
-                      ),
-                      Text(model['desciption'],
-                        style: const TextStyle(
-                        fontSize: 20,
-                        fontFamily: 'Itim')),
-                  // Card(
-                  // margin: EdgeInsets.only(left: 40,right: 40,top:20),
-                  // elevation: 5,
-                  // color: Color.fromARGB(255, 245, 244, 244),
-                  // shape: RoundedRectangleBorder(
-                  // borderRadius: BorderRadius.circular(12.0),
-                  // ),
-                  // child  : 
-                  //     ListTile(
-                  //       subtitle:  Text(model['desciption'],
-                  //       style: const TextStyle(
-                  //       fontSize: 20,
-                  //       fontFamily: 'Itim'))),
-           
-                  // )
-                  // ,const Text('Create your review >',
-                  //       style: TextStyle(color: Color.fromARGB(255, 245, 	173,172 ),
-                  //         fontSize: 30,
-                  //         fontFamily: 'FuzzyBubbles'
-                  //       ),
-                  //     ),Image.asset('assets/icons8-cart-64.png')
-                ],
-              ),
-            )
+        return          
+               
+        SingleChildScrollView(
+        child:Column(
+          children: [
+          Container(child: Image.network(model['url_picture'],)),   //รูปคอมเมนต์
+
+      Card (                   
+                margin: EdgeInsets.only(left: 10,right: 10,top:20),
+                elevation: 5,
+                color: Color.fromARGB(255, 247, 247, 247),
+                shape: RoundedRectangleBorder(                 
+                borderRadius: BorderRadius.circular(12.0),
+                ),child:Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [ 
+                
+                Container(
+                  width: 2300,
+                  height: 300,
+                  child: 
+                  SingleChildScrollView(
+                    padding: EdgeInsets.all(20),
+        child:Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [ 
+                      Text("สินค้า",style: const TextStyle(
+                            fontSize: 20,
+                            fontFamily: 'Mitr')),
+                      Text(model['title'],
+                    
+                          ),
+                          Text("comment",style: const TextStyle(
+                            fontSize: 20,
+                            fontFamily: 'Mitr')),
+                          Text(model['desciption'],
+                            ),
+                    ],
+                  ),
+                ))
+              ],
+            )),
           ],
-        );
+        ));
       },
     );
     

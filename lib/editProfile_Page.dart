@@ -22,12 +22,17 @@ class _EditProfileState extends State<EditProfile> {
     return  Form(
       key: _formstate,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Text("Information",style: TextStyle(color: Color.fromARGB(255, 245, 	173,172 ),fontSize: 25)),
+        SizedBox(height: 20,),
         firstNameField(data),
+        SizedBox(height: 20,),
         lastNameField(data),
+        SizedBox(height: 20,),
         phoneField(data),
-        ageField(data),
+        // ageField(data),
         Row(
           children: [
             Expanded(
@@ -129,9 +134,9 @@ class _EditProfileState extends State<EditProfile> {
     keyboardType: TextInputType.text,
     textInputAction: TextInputAction.next,
     decoration: InputDecoration(
-      labelText: ('Last name'),
+      labelText: ('First name'),
       // icon: const Icon(Icons.email),
-      hintText: ('enter your lastname '),
+      hintText: ('enter your firstname '),
       border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(20),
       )
@@ -159,7 +164,8 @@ class _EditProfileState extends State<EditProfile> {
               backgroundColor: Color.fromARGB(255, 245, 	173,172 ),
               title: const Text('Edit Profile',style: TextStyle(color: Color.fromARGB(255, 247, 247, 247),fontSize: 30,fontFamily: 'Mitr'))
             ),
-      body: SafeArea(child: Padding(
+      body: SafeArea(
+        child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: StreamBuilder(
           stream: FirebaseFirestore.instance.collection("users-form-data").doc(FirebaseAuth.instance.currentUser!.email).snapshots(),

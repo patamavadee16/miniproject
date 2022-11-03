@@ -6,7 +6,6 @@ import 'package:miniproject_1/cart_Page.dart';
 import 'package:miniproject_1/createReview_Page.dart';
 import 'package:miniproject_1/editProfilePic.dart';
 import 'package:miniproject_1/editProfile_page.dart';
-import 'package:miniproject_1/favorite_Page.dart';
 import 'package:miniproject_1/forgotPassword_Page.dart';
 import 'package:miniproject_1/login_Page.dart';
 import 'package:miniproject_1/order_Page.dart';
@@ -41,7 +40,6 @@ class MyApp extends StatelessWidget {
          '/register': (context) => RegisterPage(),
          '/homepage': (context) => BottomNavi(),
          '/forgotPasswordPage': (context) => ForgotPasswordPage(),
-         '/Favourite': (context) => Favourite(),
          '/Cart': (context) => Cart(),
          '/orderPage': (context) =>OrderPage(),
          '/userForm': (context) =>UserForm(),
@@ -49,7 +47,8 @@ class MyApp extends StatelessWidget {
          '/editProfile_page': (context) =>EditProfile(),
          '/createReview': (context) =>CreateReviewPost(),
          '/reviewPage': (context) =>ReviewPage(),
-         '/editProfilePic': (context) =>EditProfilePic()
+         '/editProfilePic': (context) =>EditProfilePic(),
+        //  '/orderForm': (context) =>OrderForm()
         //  '/ShowDetailPost': (context) =>ShowDetailPost(),
       },
     );
