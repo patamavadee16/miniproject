@@ -48,7 +48,7 @@ class _CartState extends State<Cart> {
                             .collection('users-cart-items')
                             .doc(FirebaseAuth.instance.currentUser!.email)
                             .collection("items")
-                            .doc('clothingID')
+                            .doc(document['clothingID'])
                             .delete();
                               }, icon: const Icon(Icons.delete),
                             ),
