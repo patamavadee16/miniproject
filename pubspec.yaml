@@ -50,8 +50,11 @@ dependencies:
   flutter_local_notifications: ^12.0.3
   http: ^0.13.0
   path_provider: ^2.0.1 
+  flutter_launcher_icons: ^0.10.0
 
-
+flutter_icons:
+  android: true
+  image_path: "assets/icon/icon.png"
 dev_dependencies:
   flutter_test:
     sdk: flutter
