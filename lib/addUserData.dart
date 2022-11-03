@@ -59,23 +59,25 @@ class _UserFormState extends State<UserForm> {
             dateOfBirth(), 
             SizedBox(height: 20,),
             ageTextFormField(), 
-             const Text('  Gender',style: TextStyle(color: Color.fromARGB(255, 0, 0, 0),fontSize: 20,),),
+            const Text('  Gender',style: TextStyle(color: Color.fromARGB(255, 0, 0, 0),fontSize: 20,),),
             Gender(), 
             SizedBox(height: 20,),
-            buildSaveButton()
+            buildSaveButton(),
+            SizedBox(height: 20,),
+            const Text("Birthday, age and gender cannot be edited later.")
+
           ],
         ),
       ),
     );
   }
- 
+//update data
  ElevatedButton buildSaveButton() {
     return ElevatedButton(    
         onPressed: () async {
           if (_form.currentState!.validate()) {
             print('save button press');
             Map<String, dynamic> data = {
-              // "name":_nameController.text,
                "firstname":_firstname.text,
                "lastname":_lastname.text,
                "phone":_phone.text,
@@ -89,11 +91,11 @@ class _UserFormState extends State<UserForm> {
               final FirebaseAuth _auth = FirebaseAuth.instance;
               var  currentUser = _auth.currentUser;
               CollectionReference _collectionRef = FirebaseFirestore.instance.collection("users-form-data");
-             print(_firstname.toString());
+              print(_firstname.toString());
                 return _collectionRef.doc(currentUser!.email)
-                      .set(data)
+                      .update(data)
                       .then((value) =>
-                      Navigator.push(context, MaterialPageRoute(builder: (_)=>LoginPage())));
+                      Navigator.pushReplacementNamed(context, '/'));
             } catch (e) {
                ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -114,6 +116,7 @@ class _UserFormState extends State<UserForm> {
       child: const Text('Save',style:TextStyle(color: Colors.white,fontSize: 20)),
       );
   }
+// firstName
   TextFormField firstNameTextFormField() {
     return TextFormField(
       controller:_firstname,
@@ -135,6 +138,7 @@ class _UserFormState extends State<UserForm> {
       ),
     );
   }
+// lastName
   TextFormField lastNameTextFormField() {
     return TextFormField(
       controller:_lastname,
@@ -155,20 +159,8 @@ class _UserFormState extends State<UserForm> {
       ),
     );
   }
-  Future<void> _selectDateFromPicker(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime(DateTime.now().year - 20),
-      firstDate: DateTime(DateTime.now().year - 70),
-      lastDate: DateTime(DateTime.now().year),
-    );
-    if (picked != null) {
-      setState(() {
-        _dateOfbirth.text = "${picked.day}/ ${picked.month}/ ${picked.year}";
-      });
-    }
-  }
-  
+
+//phone
   TextFormField phoneNumberTextFormField() {
     return TextFormField(
       controller:_phone,
@@ -190,6 +182,20 @@ class _UserFormState extends State<UserForm> {
       ),
     );
   }
+//dateOfbirth
+  Future<void> _selectDateFromPicker(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime(DateTime.now().year - 20),
+      firstDate: DateTime(DateTime.now().year - 70),
+      lastDate: DateTime(DateTime.now().year),
+    );
+    if (picked != null) {
+      setState(() {
+        _dateOfbirth.text = "${picked.day}/ ${picked.month}/ ${picked.year}";
+      });
+    }
+  }
   TextFormField dateOfBirth() {
     return TextFormField(
       validator: (value) {
@@ -210,6 +216,7 @@ class _UserFormState extends State<UserForm> {
                 ),
     );
   }
+//age
   TextFormField ageTextFormField() {
     return TextFormField(
       validator: (value) {
@@ -231,6 +238,7 @@ class _UserFormState extends State<UserForm> {
       ),
     );
   }
+  //gender
   Widget Gender() {
     return 
             Row(children: <Widget> [

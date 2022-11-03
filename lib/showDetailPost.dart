@@ -78,13 +78,13 @@ class _ShowDetail extends State<ShowDetailPost> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [ 
-                      Text("สินค้า",style: const TextStyle(
+                      const Text("สินค้า",style: TextStyle(
                             fontSize: 20,
                             fontFamily: 'Mitr')),
                       Text(model['title'],
                     
                           ),
-                          Text("comment",style: const TextStyle(
+                          const Text("comment",style: TextStyle(
                             fontSize: 20,
                             fontFamily: 'Mitr')),
                           Text(model['desciption'],
@@ -99,26 +99,6 @@ class _ShowDetail extends State<ShowDetailPost> {
       },
     );
     
-  }
-  IconButton addToFav_click(QueryDocumentSnapshot<Object?> document) {
-    return IconButton(onPressed: (){
-                    addToFav();
-                  },
-                  icon: Icon(Icons.favorite_border),);
-  }
-    Future addToFav() async {
-   
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    var currentUser = _auth.currentUser;
-    
-    CollectionReference _collectionRef =
-        FirebaseFirestore.instance.collection("users-fav-post");
-    return _collectionRef
-        .doc(currentUser!.email).collection('post').doc()
-        .set({
-      "title":widget._idi['title'],
-
-    }).then((value) => print("Added to Fav"));
   }
   Stream<QuerySnapshot> getProduct(String titleID) {
     // Firestore _firestore = Firestore.instance;

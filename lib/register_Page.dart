@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -130,10 +131,27 @@ class _RegisterPageState extends State<RegisterPage> {
       );
       userCredential.user!.sendEmailVerification();
       var authCredential = userCredential.user;
-      
+      Map<String, dynamic> data = {
+              // "name":_nameController.text,
+               "firstname":'',
+               "lastname":'',
+               "phone":'',
+               "dateOfbirth":'',
+               "gender":'',
+               "age":'',
+               'url_picture':"",
+               "email":FirebaseAuth.instance.currentUser!.email
+            };
       print(authCredential!.uid);
       if(authCredential.uid.isNotEmpty){
-        Navigator.pushNamed(context, '/userForm');
+        final FirebaseAuth _auth = FirebaseAuth.instance;
+        var  currentUser = _auth.currentUser;
+              CollectionReference _collectionRef = FirebaseFirestore.instance.collection("users-form-data");
+                return _collectionRef.doc(currentUser!.email)
+                      .set(data)
+                      .then((value) =>
+                      Navigator.pushReplacementNamed(context, '/userForm'));
+        
       }
       else{
         Fluttertoast.showToast(msg: "Something is wrong");

@@ -52,7 +52,6 @@ class _HomeState extends State<Home> {
   void initState() {
     fetchCarouselImages();
     fetchProducts();
-    super.initState();
   }
 
   @override

@@ -143,17 +143,16 @@ class _EditProfileState extends State<EditProfile> {
     ),
       );
   }
-
+//updateData
   updateData(){
     CollectionReference _collectionRef = FirebaseFirestore.instance.collection("users-form-data");
     return _collectionRef.doc(FirebaseAuth.instance.currentUser!.email).update(
         {
-          "firststname":_firstName!.text,
+          "firstname":_firstName!.text,
           "lastname":_lastName!.text,
           "phone":_phone!.text,
-          "age":_age!.text,
         }
-        ).then((value) => print("Updated Successfully"));
+        ).then((value) => Navigator.pushReplacementNamed(context, '/homepage'));
   }
 
 
@@ -167,6 +166,7 @@ class _EditProfileState extends State<EditProfile> {
       body: SafeArea(
         child: Padding(
         padding: const EdgeInsets.all(20.0),
+        //select
         child: StreamBuilder(
           stream: FirebaseFirestore.instance.collection("users-form-data").doc(FirebaseAuth.instance.currentUser!.email).snapshots(),
           builder: (BuildContext context, AsyncSnapshot snapshot){
@@ -180,17 +180,5 @@ class _EditProfileState extends State<EditProfile> {
         ),
       )),
     );
-  }
-    Future<Null> chooseImage(ImageSource source) async {
-    try {
-      var object = await ImagePicker().getImage(
-        source: source,
-        maxWidth: 800.0,
-        maxHeight: 800.0,
-      );
-      setState(() {
-        file = File(object!.path);
-      });
-    } catch (e) {}
   }
 }

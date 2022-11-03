@@ -2,9 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:favorite_button/favorite_button.dart';
-import 'package:miniproject_1/order_form.dart';
+
 
 class ShowDetailOrder extends StatefulWidget {
   final String _idi; 
@@ -39,7 +37,7 @@ class _ShowDetailOrder extends State<ShowDetailOrder> {
             
             body: snapshot.hasData
                 ? buildProductList(snapshot.data!)
-                :Center(child: CircularProgressIndicator(),)
+                :const Center(child: CircularProgressIndicator(),)
           );
         });
   }
@@ -65,7 +63,7 @@ class _ShowDetailOrder extends State<ShowDetailOrder> {
                  
         
                 
-                Text('รายละเอียดสินค้า',style: TextStyle(color: Color.fromARGB(255, 0, 0, 0),
+                const Text('รายละเอียดสินค้า',style: TextStyle(color: Color.fromARGB(255, 0, 0, 0),
                           fontSize: 20,
                           fontFamily: 'Mitr'
                         ),),
@@ -74,7 +72,7 @@ class _ShowDetailOrder extends State<ShowDetailOrder> {
                   Text('Color : '+model['color']),
                   Text('Price : ${model['price']} ฿'),
                   const SizedBox(height: 20,),
-                  Text('รายละเอียดการจัดส่ง',style: TextStyle(color: Color.fromARGB(255, 0, 0, 0),
+                  const Text('รายละเอียดการจัดส่ง',style: TextStyle(color: Color.fromARGB(255, 0, 0, 0),
                           fontSize: 20,
                           fontFamily: 'Mitr'
                         ),),

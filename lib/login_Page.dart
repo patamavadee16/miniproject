@@ -183,7 +183,7 @@ class _LoginPageState extends State<LoginPage> {
                   sendNotification();
                   ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("Login Pass")));
-                      Navigator.pushNamed(context, '/homepage');
+                      Navigator.pushReplacementNamed(context, '/homepage');
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("Please verify email")));

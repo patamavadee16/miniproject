@@ -114,7 +114,7 @@ Widget groupImage() => Row(
       ),
     );
   }        
-  TextFormField descripTextFormField() {
+TextFormField descripTextFormField() {
     return TextFormField(
       minLines: 5,
       maxLines: null,
@@ -137,9 +137,8 @@ Widget groupImage() => Row(
       ),
     );
   }
-   ElevatedButton buildSaveButton() {
-    return ElevatedButton(
-        
+ElevatedButton buildSaveButton() {
+    return ElevatedButton(   
         onPressed: () async {
            print('save button press');
           if (_form.currentState!.validate()) {
@@ -147,7 +146,7 @@ Widget groupImage() => Row(
                uploadPost();
                }else{ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: const Text('Please choose picture')
+                  content: Text('Please choose picture')
                 ),
               );
               }
@@ -156,11 +155,12 @@ Widget groupImage() => Row(
           } ,
 
      style: ElevatedButton.styleFrom(
-        primary:Color.fromARGB(255, 245, 	173,172 ),
+        primary:const Color.fromARGB(255, 245, 	173,172 ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),),
       child: const Text('Save',style:TextStyle(color: Colors.white,fontSize: 20)
        ),);
   }
+//upload image ไป firebase แล้ว get url
   Future uploadPost()async{
      Random random = Random();
     int i = random.nextInt(100);
@@ -176,21 +176,21 @@ Widget groupImage() => Row(
   insertPost(urlPicture);
    
   }
+
+  // insert
   Future<void> insertPost(String urlPicture)async{
     final FirebaseAuth _auth = FirebaseAuth.instance;
     var  currentUser = _auth.currentUser;
     Map<String, dynamic> data = {
-      "Email":currentUser!.email,
+              "Email":currentUser!.email,
               "title": title.text,
               "desciption": description.text,
               "url_picture": urlPicture
-  };
-
-              CollectionReference _collectionRef = FirebaseFirestore.instance.collection("users-review-post");
-            //  print(_firstname.toString());
-                return _collectionRef.doc((FirebaseAuth.instance.currentUser!.email))
+    };
+              CollectionReference collectionRef = FirebaseFirestore.instance.collection("users-review-post");
+                return collectionRef.doc((FirebaseAuth.instance.currentUser!.email))
                 .set(data)
                 .then((value) =>
-                Navigator.push(context, MaterialPageRoute(builder: (_)=> BottomNavi())));
+                Navigator.pushNamedAndRemoveUntil(context, '/reviewPage', ModalRoute.withName('/homepage')));
   }
 }

@@ -85,7 +85,7 @@ class _OrderFormState extends State<OrderForm> {
     return ElevatedButton(
             onPressed: (){
             updateData(data);
-            sendNotification();
+            
             },
             style: ElevatedButton.styleFrom(
           primary:const Color.fromARGB(255, 245, 	173,172 ),
@@ -207,6 +207,7 @@ class _OrderFormState extends State<OrderForm> {
      Random random = Random();
     int i = random.nextInt(100);
     if (_formstate.currentState!.validate()){
+      sendNotification();
        CollectionReference _collectionRef =
         FirebaseFirestore.instance.collection("users-order");
     return _collectionRef
@@ -222,7 +223,7 @@ class _OrderFormState extends State<OrderForm> {
       "phone":_phone.text,
       "address":{"No.":_address.text,
       "tombon":_tombon.text, "amphone":_amphone.text,"provide":provice,"zipcode":_zipCode.text}
-    }).then((value) =>  Navigator.push(context, MaterialPageRoute(builder: (_)=> BottomNavi())));
+    }).then((value) =>  Navigator.pushNamedAndRemoveUntil(context, '/OrderPage', ModalRoute.withName('/homepage')));
     }
    
      
@@ -236,7 +237,7 @@ class _OrderFormState extends State<OrderForm> {
     InputDecoration(
       labelText: 'Province',
       border: OutlineInputBorder(borderRadius: BorderRadius.horizontal(left :Radius.circular(20), right:Radius.circular(20)))
-      ),
+    ),
  
     child: DropdownButtonHideUnderline(
     child: DropdownButton(

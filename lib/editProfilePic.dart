@@ -5,7 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:miniproject_1/reviewPage.dart';
+import 'package:miniproject_1/bottomNavi.dart';
 
 class EditProfilePic extends StatefulWidget {
   const EditProfilePic({super.key});
@@ -97,7 +97,7 @@ Future<Null> chooseImage(ImageSource source) async {
           } ,
 
      style: ElevatedButton.styleFrom(
-        primary:Color.fromARGB(255, 245, 	173,172 ),
+        primary:const Color.fromARGB(255, 245, 	173,172 ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),),
       child: const Text('Save',style:TextStyle(color: Colors.white,fontSize: 20)
        ),);
@@ -124,6 +124,6 @@ Future<Null> chooseImage(ImageSource source) async {
         {
           "url_picture": urlPicture
         }
-        ).then((value) => print("Updated Successfully"));
+        ).then((value) => Navigator.pushReplacementNamed(context, '/homepage'));
   }
 }

@@ -1,8 +1,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:miniproject_1/showDetailPost.dart';
 class ReviewPage extends StatefulWidget {
   const ReviewPage({super.key});
@@ -12,26 +10,14 @@ class ReviewPage extends StatefulWidget {
 }
 
 class _ReviewPageState extends State<ReviewPage> {
-  FirebaseFirestore _firestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor:  Color.fromARGB(255, 245, 	173,172 ),
-      //   actions: <Widget>[
-      //       IconButton(
-      //           onPressed: () {
-      //             FirebaseAuth.instance.signOut();
-      //             Navigator.pushReplacementNamed(context, '/');
-      //           },
-      //           icon: const Icon(Icons.logout))
-      //     ],
-      // ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('users-review-post').snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if(!snapshot.hasData){
-            return Center(child: CircularProgressIndicator(),);
+            return const Center(child: CircularProgressIndicator(),);
           }
 
           return Stack(children: [ListView(
@@ -54,8 +40,9 @@ class _ReviewPageState extends State<ReviewPage> {
                                  style: TextStyle(
                                 fontSize: 20,
                                 fontFamily: 'Mitr'
-                                ),),SizedBox(height: 5,),
-                                Text((document['desciption']),style: TextStyle(
+                                ),),
+                                const SizedBox(height: 5,),
+                                Text((document['desciption']),style: const TextStyle(
                                 fontSize: 16,
                                 fontFamily: 'Mitr'
                                 )),

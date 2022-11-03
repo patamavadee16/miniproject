@@ -12,6 +12,7 @@ import 'package:miniproject_1/order_Page.dart';
 import 'package:miniproject_1/profile_page.dart';
 import 'package:miniproject_1/register_Page.dart';
 import 'package:miniproject_1/reviewPage.dart';
+import 'package:miniproject_1/showDetailOrder.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
          '/createReview': (context) =>CreateReviewPost(),
          '/reviewPage': (context) =>ReviewPage(),
          '/editProfilePic': (context) =>EditProfilePic(),
+         '/OrderPage': (context) =>OrderPage(),
         //  '/orderForm': (context) =>OrderForm()
         //  '/ShowDetailPost': (context) =>ShowDetailPost(),
       },

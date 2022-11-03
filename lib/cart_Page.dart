@@ -15,6 +15,7 @@ class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // select 
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
         .collection('users-cart-items')
@@ -24,7 +25,7 @@ class _CartState extends State<Cart> {
         .snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if(!snapshot.hasData){
-            return Center(child: CircularProgressIndicator(),);
+            return const Center(child: CircularProgressIndicator(),);
           }
           return 
               ListView(          
@@ -38,11 +39,12 @@ class _CartState extends State<Cart> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(document['clothingNameThai']),
-                              Text('Color : '+(document['color'])),
+                              Text('Color : '+document['color']),
                               Text('${document['price']}'+' ฿',style: const TextStyle(fontSize: 15,fontWeight: FontWeight.bold,fontFamily: 'Itim'),
                                 ),
                             ],
                           ),
+                          // delete
                           trailing:IconButton(onPressed: (){
                             FirebaseFirestore.instance
                             .collection('users-cart-items')

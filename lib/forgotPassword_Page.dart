@@ -32,7 +32,7 @@ class _ForgotPasswordPage extends State<ForgotPasswordPage> {
           )
         ),
       body: Form(
-        // key: _formstate,
+        key: _formstate,
         child: ListView(
           
           padding: EdgeInsets.all(8.0),
@@ -94,11 +94,12 @@ class _ForgotPasswordPage extends State<ForgotPasswordPage> {
     return ElevatedButton(
       
       onPressed: () async {
+        if (_formstate.currentState!.validate()) {
         print('Reset Password');
         print(email.text);
         sendPasswordResetEmail(email.text);
         Navigator.pushNamed(context, '/');
-      },
+      }},
       style: ElevatedButton.styleFrom(
       backgroundColor: const Color.fromARGB(255, 245, 	173,172 ),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),),
