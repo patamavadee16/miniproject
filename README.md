@@ -1,6 +1,6 @@
 # miniproject 
 
-A new Flutter project.
+Flutter miniproject.
  สมาชิก
 * 116310400055-4 นางสาวสิริภัสสร มีแววแสง
 * 116310400477-0 นางสาวปฐมาวดี ทับทอง
